@@ -1,0 +1,692 @@
+\chapter{Prologue}
+
+\section{The $\mathcal{L}$ of Set Theory}
+
+\begin{defn}
+  Numbers: $N$, $Z$, $Q$, $R$, $C$
+\end{defn}
+
+\begin{defn}
+  Sets:
+  \begin{itemize}
+  \item ``family'' and ``collection'' used as synonyms for ``set''
+  \item $\mathscr{P}(X) = \{E \mid E\subset X\}$ --- \emph{power set}
+  \item $\{E_n\}_1^\infty$ same as $\{E_n\}_{n=1}^\infty$
+  \item $\limsup E_n = \cap_{k=1}^\infty\cup_{n=k}^\infty E_n = \{x \mid x\in E_n \text{ for infinitely many } n\}$
+    \sketch{$\mathtt{\forall k \exists n \geq k \st x \in E_n}$}
+  \item $\liminf E_n = \cup_{k=1}^\infty\cap_{n=k}^\infty E_n = \{x \mid x\in E_n \text{ for all but finitely many } n\}$
+    \sketch{$\mathtt{\exists k \st \forall n \geq k, x \in E_n}$}
+  \item $E \bigtriangleup F = (E \setminus F) \cup (F \setminus E) = (E \cup F) \setminus (E \cap F)$
+    --- \emph{symmetric difference}
+  \item the patterns
+    $\setcomp{(\cup_\alpha E_\alpha)} = \cap_\alpha (\setcomp{E_\alpha})$
+    and
+    $\setcomp{(\cap_\alpha E)} = \cup_\alpha(\setcomp{E_\alpha})$
+    are called \emph{deMorgan's laws}
+  \item for map ${f: X \rightarrow Y}$, view
+    ${f^{-1}: \mathscr{P}(Y) \rightarrow \mathscr{P}(X)}$,
+    and note that this \emph{preimage} preserves unions,
+    intersections, and compliements --- i.e.
+    \begin{IEEEeqnarray*}{rCl}
+      f^{-1}(\cup_\alpha E_\alpha) & = & \cup_\alpha f^{-1}(E_\alpha)
+      \\
+      f^{-1}(\cup_\alpha E_\alpha) & = & \cup_\alpha f^{-1}(E_\alpha)
+      \\
+      f^{-1}(\setcomp{E}) & = & \setcomp{(f^{-1}\small{(E)})}
+    \end{IEEEeqnarray*}
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  the \emph{cartesian product} of sets $\{X_\alpha\}_{\alpha \in A}$ is the set of maps
+  \[ \{ f: A \rightarrow \cup_{\alpha\in A} X_\alpha \mid f(\alpha)\in X_\alpha , \forall \alpha \in A \} \]
+  and is denoted $\prod_{\alpha\in A} X_\alpha$ with the \emph{projection map} or \emph{coordinate map}
+  \[ \pi_\alpha : \prod_{\alpha\in A} X_\alpha \rightarrow X_\alpha \quad f \mapsto f(\alpha) \]
+  \begin{itemize}
+  \item when viewing an element $x$ of $\prod_\alpha X_\alpha$ as a point,
+    write $x_\alpha$ for $\pi_\alpha(x)$,
+    the $\alpha^{\text{th}}$ \emph{coordinate} of $x$
+  \item $Y^A$, the set of map ${A \rightarrow Y}$ is a special case of
+    ${\prod_{\alpha\in A} X_\alpha}$, namely
+    ${X_\alpha = Y, \forall \alpha\in A}$
+  \end{itemize}
+\end{defn}
+
+
+\section{Orderings}
+
+\begin{defn}\
+  \begin{itemize}
+  \item \emph{partial ordering}
+  \item \emph{linear or total ordering}
+  \item posets $X, Y$ \emph{order isomorphic} if
+    \[ \exists\text{bij.~}f: X \rightarrow Y \st
+    x_1 < x_2 \Leftrightarrow f(x_1) < f(x_2) \]
+  \item ${x \in X}$ \emph{maximal} if
+    \[ \forall y\in X, x\leq y \Rightarrow y=x \]
+    (\emph{minimal} similar)
+  \item ${x\in X}$ is an \emph{upper bound} for ${E\subset X}$
+    if $y\leq x, \forall y\in E$ (\emph{lower bound} similar)
+  \end{itemize}
+\end{defn}
+
+\begin{rem}{}
+  maximal does not imply upper bound for posets.
+  consider ${\mathscr{P}(\small{[n]})\setminus [n]}$ under inclusion.
+\end{rem}
+
+\begin{defn}
+  a \emph{well ordering} is a total ordering such that
+  all nonempty sets have a minimal element.
+\end{defn}
+
+\begin{axiom}
+  Equivalent versions of the axiom include
+  \begin{description}
+  \item[Zorn] if every linearly-ordered subset of a poset has an upper bound,
+    then the poset has a maximal element
+  \item[Choice] the cartesian product of a nonempty collection of nonempty sets is nonempty
+  \item[Well-ordering principle] every nonempty set has a well-ordering
+  \item[Hausdorff Maximal Principle] if $X$ is a poset with relation $<$,
+    then ${\exists E\subset X}$ linearly ordered by $<$ such that
+    ${E\subsetneq Y\subset X}$ implies $Y$ not linearly ordered by $<$.
+  \end{description}
+\end{axiom}
+\sketch{equivalence proof?}
+
+\section{Cardinality}
+For ${X, Y \neq \emptyset}$, write
+\begin{IEEEeqnarray*}{rCl}
+  \card(X)\leq\card(Y)
+  & \text{ if } &
+  \exists\text{inj. } X\rightarrow Y
+  \\
+  \card(X)=\card(Y)
+  & \text{ if } &
+  \exists\text{bij. } X\rightarrow Y
+  \\
+  \card(X)\geq\card(Y)
+  & \text{ if } &
+  \exists\text{surj. } X\rightarrow Y
+  \\
+  \card(X)<\card(Y)
+  & \text{ if } &
+  \exists\text{inj. } X\rightarrow Y
+  \land \nexists\text{bij. } X\rightarrow Y
+  \\
+  \card(X)>\card(Y)
+  & \text{ if } &
+  \exists\text{surj. } X\rightarrow Y
+  \land \nexists\text{bij. } X\rightarrow Y
+\end{IEEEeqnarray*}
+
+and ${\card(\emptyset) < \card(X), \forall X\neq\emptyset}$.
+
+This treatment explicitly avoids defining cardinal numbers.
+
+For the rest of this section, assume sets nonempty
+to avoid special cases.
+
+% labels lifted from numbering in original text
+\begin{prop}\label{prop:0.6}
+  \[
+  \card(X)\leq\card(Y) \iff \card(Y)\geq\card(X)
+  \]
+\end{prop}
+
+\begin{prop}\label{prop:0.7}
+  \[
+  \forall X,Y,\
+  \card(X)\leq\card(Y) \lor \card(Y)\leq\card(X)
+  \]
+\end{prop}
+
+\sketch{%
+  both of the preceeding rely on cartesian products to
+  construct injections.
+  \\
+  the latter applies Zorn to injections
+  $\mathtt{E\subset X\rightarrow Y}$ regarded as subsets of
+  $\mathtt{X\times Y}$.
+  the maximal element (or its inverse) is found to be
+  injective on all of $\mathtt{X}$ (or $\mathtt{Y}$).
+}
+
+\begin{thm}[Schr\"oder-Bernsten]\label{thm:0.8}\label{thm:schroder-bernstein}
+  \[
+  \card(X)\leq\card(Y) \land \card(Y)\leq\card(X) \Rightarrow
+  \card(X)=\card(Y)
+  \]
+\end{thm}
+\begin{proof}
+  There are maps ${X\rightarrow Y}$ and ${Y\rightarrow X}$
+  corresponding to the cardinality statements in the hypothesis,
+  so there is a partition
+  ${X = X_\infty \sqcup X_X \sqcup X_Y}$
+  according to whether the process of taking preimages
+  of elements of $X$
+  (each of which is either empty or consists of a single element
+  since the maps are surjective)
+  alternatingly under each of these maps
+  \begin{itemize}
+  \item[($\infty$)] iterates infinitely
+  \item[($X$)] terminates in ${X\setminus\Ima(Y\rightarrow X)}$
+    (i.e. --- on some even iteration,
+    including perhaps the $0^{\text{th}}$,
+    the current element of $X$ is not in the image of ${Y\rightarrow X}$)
+  \item[($Y$)] terminates in ${Y\setminus\Ima(X\rightarrow Y)}$
+    (i.e. --- on some odd iteration,
+    the current element of $Y$ is not in the image of ${X\rightarrow Y}$)
+    .
+  \end{itemize}
+  Similarly, there is a partition
+  ${Y = Y_\infty \sqcup Y_Y \sqcup Y_X}$.
+
+  Now call the injections provided by hypothesis
+  ${f: X\rightarrow Y}$ and ${g: Y\rightarrow X}$
+  in order to define a map
+  \begin{equation*}
+    X \rightarrow Y \quad x\mapsto\left\{
+    \begin{array}{rl}
+      f(x) & \text{if } x\in X_\infty\cup X_X,\\
+      g^{-1}(x) & \text{if } x\in X_Y.
+    \end{array}
+    \right.
+  \end{equation*}
+  \sketch{? check that this is a bijection}
+\end{proof}
+
+\begin{prop}\label{prop:0.9}
+  For all sets, $X$,
+  \[ \card(X) < \card\big(\mathscr{P}(X)\big) \]
+\end{prop}
+\begin{proof}
+  The map
+  ${X \rightarrow \mathscr{P}(X) \quad x\mapsto \{x\}}$
+  is certainly injective.
+
+  Suppose there is some bijective ${g: X \rightarrow \mathscr{P}}$,
+  and put ${Y=\{x\in X\mid x\notin g(x)\}}$.
+  Since $g$ is, in particular, surjective, by supposition
+  ${\exists x_0\in X \st g(x_0)=Y}$.  Then, by defintion of $Y$,
+  either ${x_0\in Y \Rightarrow x_0\notin g(x_0)=Y}$
+  or ${x_0\notin Y \Rightarrow x_0\in g(x_0)=Y}$,
+  and in both cases the RHS of the implication contradicts the LHS.
+  So there is no bijection --- indeed, not even a surjection ---
+  from $X$ to ${\mathscr{P}(X)}$.
+\end{proof}
+
+\begin{prop}\label{prop:0.10}
+  finite products and countable unions of countable sets are countable
+\end{prop}
+\sketch{%
+  omitting proof
+  and a few other results about countability%
+}
+
+\begin{defn}
+  \[\card(X) = \mathfrak{c} \iff \card(X) = \card(R) \]
+\end{defn}
+
+so ${\card(X)\geq\mathfrak{c}}$ implies $X$ uncountable,
+and the converse is undecidable
+
+\sketch{%
+  how's ``undecidable'' different from ``independent'', again?%
+}
+
+\section{More about well-ordered sets}
+\sketch{%
+  skipping for now as this is optional,
+  except maybe for a few exercises.
+  \\
+  it's essentially about ordinal numbers
+}
+
+\section{Extended Reals}
+\[ \overline R = R \cup \{-\infty, \infty\}
+\text{ with } -\infty < x < \infty \]
+
+\sketch{%
+  no mention of $\mathtt{\overline R}$ as a field.
+  $\mathtt{-\infty+\infty}$ doesn't make sense, for instance.
+}
+
+\begin{defn}\
+  \begin{itemize}
+  \item subsets of $\overline R$ have
+    \begin{description}
+    \item[\emph{supremums}] least upper bounds
+      (i.e. --- minimal element in set of upper bounds)
+    \item[\emph{infimums}] greatest lower bounds
+      (i.e. --- maximal element in set of lower bounds)
+    \end{description}
+    \sketch{$\circledast$
+      existance of sup and inf follows from Zorn,
+      or is there a weaker condition?
+    }
+  \item every seq ${\{x_n\}\subset\overline R}$ has
+    \begin{description}
+    \item[\emph{limit inferior}]
+      ${\liminf x_n = \sup_{k\geq 1}(\inf_{n\geq k} x_n)}$
+    \item[\emph{limit superior}]
+      ${\limsup x_n = \inf_{k\geq 1}(\sup_{n\geq k} x_n)}$
+    \end{description}
+    and it \emph{converges} if the two are equal
+    \sketch{%
+      convergence as in a metric space will be defined in the
+      next section, and the two notions of convergence
+      need to be proved equivalent.%
+    }
+  \item similarly, $\limsup$ and $\liminf$ can be defined
+    for ${f: R\rightarrow\overline R}$, as in
+    \[
+    \limsup_{x\rightarrow a} f(x) = \inf_{\delta>0}\left(
+    \sup_{x\in B_\delta(a)} f(x) \right)
+    \]
+    \sketch{? and $\mathtt{\liminf}$?}
+  \item addition and multiplication mostly as expected.
+    ${\infty-\infty}$ not defined, and
+    $0\cdot\pm\infty=0$ by convention.
+  \item for ${f: X\rightarrow [0, \infty]}$, where $X$ arbitrary
+    (perhaps uncountable) set,
+    \[
+    \sum_{x\in X} f(x) = \sup\left\{\sum X\in F \mid
+    F\subset X \land F \text{ finite}\right\}
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{prop}\label{prop:0.20}\label{prop:00:fn-sums}
+  for ${f:X\rightarrow [0,\infty]}$, let ${A=\{x\in X\mid f(x)>0\}}$.
+  then,
+  \begin{itemize}
+  \item[(a)] if $A$ uncountable, then ${\sum_{x\in X} f(x) = \infty}$
+  \item[(b)] if $A$ countably infinite, then
+    ${\sum_{x\in X} f(x) = \sum_{n=1}^\infty (f\circ g)(n)}$
+    for any bijective ${g: N\rightarrow X}$.
+  \end{itemize}
+\end{prop}
+\begin{proof}
+  \begin{itemize}
+  \item[(a)] put ${A_n=\{x\in X\mid f(x) > \frac{1}{n}\}}$
+    such that ${A=\cup_n A_n}$.
+    It's possible to choose some fixed ${n\in N}$ such that
+    $A_n$ uncountably infinite --- for otherwise, $A$ is
+    countable as the countable union of countable sets.
+    Then,
+    ${\forall F\subset A_n \text{ fin.}, \sum_{x\in X} f(x) > |F|/n}$
+    by definition of $A_n$.
+    Since the finite $F$ may be arbitrarily large because $A_n$
+    is infinite, and since $n$ is a fixed constant,
+    the sum diverges.
+  \item[(b)] squeeze
+    ${\sum_{x\in F} f(x)\leq \sum_{n=1}^N(f\circ g)(n)\leq \sum_{x\in X} f(x)}$
+    over the supremum of finite ${F\subset A}$
+    with $N$ such that $F\subset g([N])$.
+    note that arriving at equality implicitly uses
+    \[
+    \forall F'\subset X \text{ fin.},
+    \sum_{x\in F'} f(x) \leq \sum_{x\in F'\cap A} f(x)
+    \]
+  \end{itemize}
+\end{proof}
+
+\begin{rem}{}
+  relations and functions may be extended to functions pointwise.
+  For example,
+  \begin{itemize}
+  \item ${f\leq g}$ if ${f(x)\leq g(x),\forall x\in X}$
+  \item ${\max(f, g): x\mapsto \max\big(f(x), g(x)\big)}$
+  \end{itemize}
+\end{rem}
+
+\begin{defn}\
+  \begin{itemize}
+  \item (not necessarily strictly) \emph{increasing} and
+    \emph{decreasing} ${\overline R\rightarrow\overline R}$
+    functions are called \emph{monotone}
+  \item \emph{right limit} and \emph{left limit} ---
+    \[ f(a+)=\lim_{x\searrow a} f(x)=\inf_{x>a} f(x) \]
+    and
+    \[ f(a-)=\lim_{x\nearrow a} f(x)=\sup_{x<a} f(x) \]
+  \item
+    ${ f(\infty) = \sup_{a\in R} f(a) }$,
+    ${ f(-\infty) = \inf_{a\in R} f(a) }$
+  \item for ${x\in R}$, ${|x|}$ is \emph{absolute value},
+    and for ${a+bi\in C}$, ${|a+bi|=\sqrt{a^2+b^2}}$
+    is called \emph{modulus}
+  \item for $x\in R^n, C^n$, ${|x|=\left(\sum_{i=1}^n|x_i|^2\right)^{1/2}}$
+    is the \emph{euclidean norm}
+  \item ${U\subset R}$ \emph{open} if
+    \[
+    \forall x\in U\exists \text{interval } I\subset U
+    \st I \text{ is centered at } x
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{prop}\label{prop:0.21}
+  every open ${U\subset R}$ is a countable, disjoint
+  union of open intervals
+\end{prop}
+\begin{proof}
+  for ${x\in U}$, let
+  ${\mathcal{I}_x = \{\text{open interval } I\subset U \mid x\in I\}}$,
+  ${J_x=\cup\mathcal{I}_x}$ --- an open interval.
+  Then,
+  ${\forall x,y\in U, J_x=J_y\lor J_x\cap J_y = \emptyset}$,
+  according to whether (WLoG) ${(x, y) \subset U}$ or not.
+  To show ${\mathcal J=\{J_x\mid x\in U\}}$ countable,
+  choose a $f\in {\prod_{J\in\mathcal J} J\cap Q}$,
+  where the interections $J\cap Q$ are nonempty because the
+  rationals are dense in the reals.
+  Now ${f: \mathcal J \rightarrow Q}$ is injective, so conclude
+  ${\cup\mathcal J}$ is the desired countable, disjoint union.
+\end{proof}
+
+\section{Metric spaces}
+
+\begin{defn}
+  a \emph{metric} on a set $X$ is a function
+  ${\rho: X\times X \rightarrow \halfopen{0}{\infty}}$ such that
+  \begin{IEEEeqnarray*}{rCl}
+    \rho(x,y) && =0\iff x=y \\
+    \rho(x,y) && =\rho(y,x),\forall x,y\in X \\
+    \rho(x, z) && \leq\rho(x,y)+\rho(y,z),\forall x,y,z\in X
+  \end{IEEEeqnarray*}
+  and a \emph{metric space} is a set together with a metric.
+\end{defn}
+
+\begin{exa}\
+  \begin{itemize}
+  \item euclidean distance ---
+    ${\rho(x,y)=|x-y|}$ for ${x,y\in R^n}$
+  \item
+    \[ \rho_1(f,g)=\int_0^1|f(x)-g(x)|dx \]
+    and
+    \[ \rho_\infty(f,g)= \sup_{0\leq x\leq 1}|f(x)-g(x)| \]
+    for continuous ${f, g}$ on ${[0, 1]}$.
+  \item $\restr{\rho}{A\times A}$ for metric $\rho$ on $X$
+    and ${A\subset X}$.
+  \item the \emph{product metric}
+    \[
+    \rho\big((x_1, x_2), (y_1, y_2)\big)=
+    \max\big(\rho_1(x_1,y_1),\rho_2(x_2, y_2)\big)
+    \]
+    on ${X_1\times X_2}$ for metric spaces
+    ${(X_1,\rho_1)}$ and ${(X_2,\rho_2)}$.
+  \end{itemize}
+\end{exa}
+
+\begin{defn}
+  the metrics ${\rho_1, \rho_2}$ on $X$ are \emph{equivalent} if
+  \[\exists C, C'>0\st C\rho_1\leq\rho_2\leq C'\rho_1\]
+\end{defn}
+
+\sketch{check that this is an equivalence relation}
+
+\begin{rem}{}\
+  \begin{itemize}
+  \item equivalent metrics define the same open, closed,
+    and compact sets, the same convergent and Cauchy sequences,
+    and the same continuous and uniformly continuous maps
+  \item for metric spaces ${(X_1,\rho_1)}$ and ${(X_2,\rho_2)}$,
+    both
+    \[ \rho_1(x_1, y_y)+\rho_2(x_2,y_2) \]
+    and
+    \[ \left( {\rho_1(x_1, y_y)}^2+{\rho_2(x_2,y_2)}^2 \right)^{1/2} \]
+    are equivalent to the product metric.
+  \end{itemize}
+\end{rem}
+
+\sketch{double check}
+
+\begin{defn}\
+  \begin{itemize}
+  \item \emph{open ball}
+    ${B(r, x)=\{y\in X\mid \rho(x,y)<r\}}$ for ${r>0}$,
+    metric space ${(X,\rho)}$, and any ${x\in X}$.
+  \item ${E\subset X}$ \emph{open} if
+    \[\forall x\in E\exists r>0\st B(r,x)\subset E \]
+    and \emph{closed} if its compliment is open
+    \sketch{omitting some other topological basics}
+  \item \emph{interior} of ${E\subset X}$ is
+    \[ E^\circ = \cup\{U\subset E\mid U\text{ open}\} \]
+    the largest open set contained in $E$
+  \item \emph{closure} of ${E\subset X}$ is
+    \[ \overline E = \cap\{C\supset E\mid C\text{ closed}\} \]
+    the smallest closed set containing $E$
+  \item ${E\subset X}$ is \emph{dense} in $X$ if ${\overline E = X}$
+  \item ${E\subset X}$ is \emph{nowhere dense} if
+    ${{\left(\overline E\right)}^\circ = \emptyset}$
+  \item $X$ is \emph{separable} if it has a countable dense subset
+  \item a sequence ${\{x_n\}\subset X}$ \emph{converges} to
+    ${x\in X}$, written ${x_n\rightarrow x}$ or
+    ${\lim x_n = x}$, if
+    ${\lim_{n\rightarrow\infty} \rho(x_n, x) = 0}$.
+  \end{itemize}
+\end{defn}
+
+\begin{prop}\label{prop:0.22}\label{prop:00:closure-char}
+  for metric space $X$, ${E\subset X}$, and ${x\in X}$, TFAE
+  \begin{itemize}
+  \item[(a)] ${x\in\overline E}$
+  \item[(b)] ${B(r,x)\cap E\neq\emptyset,\forall r>0}$
+  \item[(c)] ${\exists\{x_n\}\subset E\st x_n\rightarrow x}$
+  \end{itemize}
+\end{prop}
+\sketch{check proof}
+
+\begin{defn}
+  ${f: X_1\rightarrow X_2}$ is
+  \begin{itemize}
+  \item \emph{continuous at} ${x\in X_1}$ if
+    \[
+    \forall\epsilon>0\exists\delta>0\st
+    \rho_1(x,y)<\delta\Rightarrow\rho_2\big(f(x),f(y)\big)<\epsilon,
+    \forall y\in X
+    \]
+  \item \emph{continuous} if it's continuous at $x$ for all ${x\in X_1}$
+  \item \emph{uniformly continuous} if
+    \[
+    \forall\epsilon>0\exists\delta>0\st
+    \rho_1(x,y)<\delta\Rightarrow\rho_2\big(f(x),f(y)\big)<\epsilon,
+    \forall x, y\in X
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{prop}\label{prop:0.23}
+  \[
+  f: X_1\rightarrow X_2\text{ cts. }\iff
+  U\subset X_2\text{ open }\Rightarrow f^{-1}(U)\subset X_1\text{ open }
+  \]
+\end{prop}
+\sketch{check proof}
+
+\begin{defn}\
+  \begin{itemize}
+  \item sequence ${\{x_n\}}$ in metric space ${(X,\rho)}$
+    is \emph{cauchy} if
+    $\rho(x_n, x_m) \rightarrow 0$ as $n, m\rightarrow \infty$
+    \sketch{$\circledast$
+      the above is just about verbatim from the text...
+      perhaps not notationally well-defined but succinct
+    }
+  \item ${E\subset X}$ is \emph{complete} if
+    \[
+    \{x_n\}\subset E\text{ cauchy}\Rightarrow x_n\rightarrow x\in E
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{prop}\label{prop:0.24}\
+  \begin{itemize}
+  \item a closed subset of a complete metric space is complete
+  \item a complete subset of metric space is closed
+  \end{itemize}
+\end{prop}
+\begin{proof}\
+  \begin{itemize}
+  \item if $X$ complete, ${E\subset X}$ closed, and
+    ${\{x_n\}\subset E}$ cauchy, then
+    ${X\text{ complete}\Rightarrow x_n\rightarrow x\in X}$
+    and
+    ${\ref{prop:00:closure-char} \Rightarrow x\in \overline E = E}$
+  \item if ${E\subset X}$ complete and ${x\in\overline E}$, by
+    \ref{prop:00:closure-char}
+    ${\exists \{x_n\}\subset E\st x_n\rightarrow x}$.
+    By the triangle inequality,
+    ${\{x_n\}\text{ convergent }\Rightarrow\{x_n\}\text{ cauchy }}$,
+    so
+    ${E\text{ complete }\Rightarrow x\in E}$.
+    Conclude ${\overline E = E}$ -- i.e. $E$ closed.
+  \end{itemize}
+\end{proof}
+
+\begin{defn}\
+  \begin{itemize}
+  \item \emph{distance of a point $x$ to a set $E$} ---
+    \[ \rho(x, E) = \inf\{\rho(x,y)\mid y\in E\} \]
+  \item \emph{distance between sets} ---
+    \[
+    \rho(E,F)=\inf\{\rho(x,y)\mid x\in E, y\in F\}=
+    \inf\{\rho(x,F)\mid x\in E\}
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{rem}{}
+  \[ \rho(x, E)=0\iff x\in\overline E \]
+\end{rem}
+
+\begin{defn}\
+  \begin{itemize}
+  \item \emph{diameter} of a set ${E\subset X}$ ---
+    ${\diam E = \sup\{\rho(x,y)\mid x,y\in E\}}$
+  \item ${E\subset X}$ is \emph{bounded} if ${\diam E < 0}$
+  \item ${\{V_\alpha\}_{\alpha\in A} \subset\mathscr{P}(X)}$
+    is a \emph{cover} of ${E\subset X}$ if
+    ${E\subset \cup_{\alpha\in A} V_\alpha}$,
+    and in this case $E$ is said to be \emph{covered by} the
+    $V_\alpha$s.
+  \item a set is \emph{totally bounded} if $\forall\epsilon>0$,
+    it (the set) can be covered by finitely many balls of
+    radius $\epsilon$
+    \sketch{?
+      examples of bounded but not totally bounded sets?}
+  \end{itemize}
+\end{defn}
+
+\begin{rem}{}\
+  \begin{itemize}
+  \item ${\text{totally bounded} \Rightarrow \text{bounded}}$
+  \item
+    ${\overline E \text{ totally bounded} \Rightarrow \overline E \text{ totally bounded}}$
+  \end{itemize}
+\end{rem}
+\begin{proof}\
+  \begin{itemize}
+  \item by triangle inequality,
+    \[
+    x,y\in\cup_{j=1}^n B(\epsilon, z_j) \Rightarrow
+    \rho(x,y)\leq 2\epsilon +\max\{\rho(z_j, z_k)\mid j,k\in [n]\}
+    \]
+  \item by \ref{prop:00:closure-char},
+    \[
+    E\subset\cup_{j\in[n]}B(\epsilon, z_j) \Rightarrow
+    \overline E \subset\cup_{j\in[n]} B(2\epsilon, z_j)
+    \]
+  \end{itemize}
+\end{proof}
+
+\begin{thm}\label{thm:0.25}\label{thm:00-compactchar}
+  for any subset $E$ of a metric space ${(X,\rho)}$, TFAE
+  \begin{itemize}
+  \item[(a)] $E$ complete and totally bounded
+  \item[(b)] \emph{[Bolzano-Weirstrass property]}
+    every sequence in $E$ has a subsequence that converges
+    to a point in $E$
+  \item[(c)] \emph{[Heine-Borel]}
+    every open cover of $E$ has a finite subcover
+  \end{itemize}
+\end{thm}
+\begin{proof}
+  \begin{description}
+  \item[(${\text{a}\Rightarrow\text{b}}$)] fix ${\{x_n\}\subset E}$.
+    since $E$ totally bounded, chooose a cover
+    ${\cup_{j\in[m_1]} B_{1,j} \supset E}$, where each $B_{1,j}$
+    has radius $2^{-1}$, and choose
+    \[
+    j_1\in[m_1]\subset N \st \card\{x_n\}\cap B_{1,j_1}=\aleph_0
+    \]
+    since ${\{x_n\}\subset E}$ countably infinite.
+
+    Continue inductively, fixing
+    ${\cup_{j\in[m_2]} B_{2,j} \supset E \cap B_{1,j_1}}$,
+    where each $B_{2,j}$ has radius $2^{-2}$, choosing
+    \[
+    j_2\in[m_2] \st \card\{x_n\}\cap B_{1,j_1}\cap B_{2,j_2}=\aleph_0
+    \]
+    \ldots and so on.
+
+    So pick
+    \[
+    x_{n_i}\in B_{i,j_i}\st
+    \{x_{n_i}\}\subset\{x_n\}\text{ cauchy},
+    \]
+    and use $E$ complete to conclude that this subsequence
+    converges to a point in $E$.
+  \item[(${\neg\text{a}\Rightarrow\neg\text{b}}$)]
+    fix cauchy ${\{x_n\}\subset E}$ with no limit in $E$
+    (i.e. --- suppose $E$ not complete).
+    then no subsequence of ${\{x_n\}}$ converges to a limit in $E$
+    \sketch{check}
+
+    or in the other case,
+    fix ${\epsilon>0}$ such that $E$ cannot be covered by balls
+    of radius $\epsilon$
+    (i.e. --- suppose $E$ not totally bounded).
+    choose any ${x_1\in E}$ and inductively define
+    ${\{x_n\}\subset E}$ by choosing
+    ${x_{k+1}\in E\setminus\cup_{n=1}^k B(\epsilon, x_n)}$
+    given ${\{x_n\}_1^k}$. then
+    \[
+    \rho(x_i,x_j)>\epsilon,\forall i,j\in N
+    \Rightarrow
+    \{x_n\}\text{ has no convergent subsequence}
+    \]
+  \item[(${\text{a}\land\text{b}\Rightarrow\text{c}}$)]
+    fix open cover ${\{V_\alpha\}_{\alpha\in A}}$ of $E$.
+    STS
+    \[
+    \exists\epsilon>0\st \left[
+      B(\epsilon, x)\cap E\neq\emptyset
+      \Rightarrow
+      \exists \alpha\in A\st B(\epsilon, x)\subset V_\alpha
+      \right]
+    \]
+    because $E$ totally bounded.
+
+    suppose otherwise.  for each ${n\in N}$, choose $B_n$
+    of radius $2^{-n}$ such that ${B_n\cap E\neq\emptyset}$
+    and ${\forall\alpha\in A, B_n\not\subset V_\alpha}$,
+    and choose ${x_n\in B_n\cap E}$.
+    Let ${\{x_{n_i}\}\subset\{x_n\}}$ be a convergent subsequence
+    by Bolzano-Weirstrass property with
+    ${x_{n_i}\rightarrow x\in E}$.
+
+    Pick ${\alpha\in A\st x\in V_\alpha}$ since $\{V_\alpha\}$ covers $E$.
+    And since $V_\alpha$ open, choose
+    ${\epsilon>0\st B(\epsilon, x)\subset V_\alpha}$.
+    \sketch{conclude}
+  \item[(${\text{c}\Rightarrow\text{b}}$)]
+    \sketch{todo}
+  \end{description}
+\end{proof}
+
+\begin{defn}
+  a set is \emph{compact} if it satisfies the properties
+  in \ref{thm:00-compactchar}
+\end{defn}

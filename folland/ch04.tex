@@ -1,0 +1,174 @@
+\chapter{Point Set Topology}
+
+\section{Topological Spaces}
+\begin{defn}\ 
+  \begin{itemize}
+  \item \emph{topology} $\tau$ on a set $X$ \texttt{\ldots}
+  \item \emph{topological space} ${(X,\tau)}$ or $X$ if $\tau$
+    from context \texttt{\ldots}
+  \item ${\mathscr{P}(X)}$ is the \emph{discrete topology}
+  \item ${\{\emptyset, X\}}$ is the
+    \emph{trivial topology} or \emph{indiscrete topology}
+  \item
+    ${\{U\subset X\mid U=\emptyset \lor \setcomp{U}\text{ finite}\}}$
+    the \emph{cofinite topology}
+  \item for topological space ${(X,\tau)}$ and ${Y\subset X}$,
+    ${\tau_Y=\{U\cap Y\mid U\in\tau\}}$ is the
+    \emph{relative topology} on $Y$ induced by $\tau$.
+  \item \emph{open sets} and \emph{closed sets} \texttt{\ldots}
+  \item \emph{relatively open sets} and \emph{relatively closed sets}
+    are those of the relative topology
+  \end{itemize}
+\end{defn}
+
+\begin{rem}{A}
+  closed sets preserved by arbitrary $\cap$ and finite $\cup$
+\end{rem}
+
+Let ${(X,\tau)}$ be a topological space throughout.
+
+\begin{defn}\ 
+  \begin{itemize}
+  \item for ${A\subset X}$,
+    \[
+    A^\circ = \cup\{U\subset A\mid U\in\tau\}
+    \text{ and }
+    \overline{A} = \cap\{U\subset A\mid\setcomp{U}\in\tau\}
+    \]
+    are the \emph{interior} and \emph{closure} or $A$,
+    respectively, and the \emph{boundary} of $A$ is
+    \[
+    \partial A=\overline{A}\setminus A
+    \stackrel{\dag}{=} \overline{A}\cap\overline{\setcomp{A}}
+    \]
+    \sketch{\dag verify}
+  \item ${A\subset X}$ is \emph{dense} in $X$ if
+    ${\overline{A} = X}$
+  \item ${A\subset X}$ is \emph{nowhere dense} if
+    ${(\overline{A})^\circ = \emptyset}$
+  \item
+    a \emph{neighborhood} of ${x\in X}$ is
+    ${A\subset X \st x\in A^\circ}$ \\
+    a \emph{neighborhood} of ${E\subset X}$ is
+    ${A\subset X \st E\subset A^\circ}$ \\
+    \sketch{\loopy Rudin's Functional Analysis text defines
+      neighborhood of ${x\in X}$ as ${U\in\tau\st x\in U}$}
+  \item
+    ${x\in X}$ is an \emph{accumulation point} of ${A\subset X}$ if
+    \[ \forall U\nbhd x, A\cap\big(U\setminus \{x\}\big)\neq\emptyset \]
+    and ${\acc(A)\subset X}$ denotes the set of all accumulation
+    points of ${A\subset X}$.
+  \end{itemize}
+\end{defn}
+
+\sketch{\loopy
+  when is ${x\not\in A\cap\acc(A)}$? (i.e. separation condition)
+}
+
+\begin{prop}\label{prop:4.1}\label{prop:04:acc-char}
+  ${\overline{A}=A\cup\acc(A)}$, so
+  ${A\text{ closed}\iff\acc(A)\subset A}$.
+\end{prop}
+\begin{proof}\ 
+  \begin{description}
+  \item[(${A\cup\acc(A)\subset\overline{A}}$)]
+    choose
+    ${x\not\in\overline{A} \stackrel{\dag}{\Rightarrow} \setcomp{A}\nbhd x}$,
+    ($\dag$: ${A\subset B\Leftrightarrow \setcomp{A}\supset\setcomp{B}}$)
+    so
+    ${\setcomp{A}\cap A=\emptyset\Rightarrow x\not\in\acc(A)}$
+    and
+    ${x\not\in\overline{A}\Rightarrow x\not\in A}$ either
+    (i.e. contrapositive to conclude).
+  \item[(${\overline{A}\subset A\cup\acc(A)}$)]
+    choose ${x\not\in A\cup\acc(A)}$.
+    ${\cup\tau = X \Rightarrow\exists V\nbhd x}$, and since
+    ${x\not\in\acc(A)}$, choose
+    ${\tilde{U}\nbhd x\st A\cap\big(\tilde{U}\setminus\{x\}\big)=\emptyset}$.
+    then ${x\not\in A\Rightarrow A\cap\tilde{U}=\emptyset}$ as well.
+    put ${U=\tilde{U}^\circ\in\tau}$.
+    by definition of neighborhood, ${x\in U}$, and
+    ${U\subset\tilde{U}\Rightarrow A\cap U=\emptyset}$,
+    so
+    ${\overline{A}\subset\setcomp{U}\Rightarrow x\not\in\overline{A}}$.
+  \item{[${A=\overline{A}\iff\acc(A)\subset A}$]}
+    by previous point,
+    \[ A=\overline{A}=A\cup\acc(A)\iff \acc(A)\subset A \]
+  \end{description}
+\end{proof}
+
+\begin{defn}\ 
+  \begin{itemize}
+  \item for topologies ${\tau_1,\tau_2}$ on $X$,
+    $\tau_1$ is \emph{weaker} (or \emph{coarser}) than $\tau_2$, and
+    $\tau_2$ is \emph{stronger} (or \emph{finer}) than $\tau_1$
+    if ${\tau_1\subset\tau_2}$.
+  \item for ${\mathcal{E}\subset\mathscr{P}(X)}$,
+    \[
+    \tau(\mathcal{E}) = \{\tau\subset \mathscr{P}(X)\mid
+    \tau\text{ a topology}\land\mathcal{E}\subset\tau\}
+    \]
+    is the \emph{topology generated} by $\mathcal{E}$, and
+    $\mathcal{E}$ is a \emph{subbase} for $\tau(\mathcal{E})$.
+  \item a \emph{neighborhood base} for $\tau$ at ${x\in X}$
+    is ${\mathcal{N}\subset\tau\st}$
+    \begin{enumerate}[label=(\arabic*)]
+    \item\label{defn:04:nbhd-base:itm:01}
+      ${x\in V,\forall V\in\mathcal{N}}$
+    \item\label{defn:04:nbhd-base:itm:02}
+      ${\forall U\in\tau, x\in U\Rightarrow \exists V\in\mathcal{N}[V\subset U]}$
+    \end{enumerate}
+  \item a \emph{base} for $\tau$ is
+    \[
+    \mathcal{B}\subset\tau\st
+    \forall x\in X,\exists\text{ neighborhood base }\mathcal{N}\subset
+    \mathcal{B}\text{ for }\tau\text{ at } x
+    \]
+  \end{itemize}
+\end{defn}
+
+\sketch{\loopy
+  filtration of all possible topologies given ${\tau_1\subset\tau_2}$
+  (where $\tau_1$ discrete and/or $\tau_2$ indiscrete?)
+  see also \ref{prop:4.4}}
+
+\begin{prop}\label{prop:4.2}\label{prop:04:base-char}
+  \[
+  \forall\mathcal{E}\subset\tau,
+  \mathcal{E}\text{ a base for }\tau\iff
+  \forall \emptyset\neq U\subset\tau\exists\mathcal{E}_U\st
+  \cup \mathcal{E}_U = U
+  \]
+  (i.e. --- every open set may be expressed as a union of
+  sets in a base).
+\end{prop}
+\begin{proof}\ 
+  \begin{description}
+  \item[($\Rightarrow$)] fix ${\mathcal{E}, U}$ according to hypothesis.
+    then,
+    \[
+    \forall x\in U,
+    \exists\text{neighborhood base }\mathcal{N}_x
+    \text{ for }\tau\text{ at } x
+    \exists V_x\in\mathcal{N}_x\subset\mathcal{E}\st
+    x\in V_x\subset U
+    \]
+    so ${U=\cup_{x\in U} V_x}$.
+  \item[($\Leftarrow$)]
+    choose ${x\in X}$ and put
+    ${\mathcal{N} = \{V\in\mathcal{E}\mid x\in V\}}$.
+    \ref{defn:04:nbhd-base:itm:01} in the definition of
+    neighborhood base follows from definition of $\mathcal{N}$.
+
+    choose ${U\in\tau\st x\in U}$, and fix ${\mathcal{E}_U}$
+    as in hypothesis.\\
+    since ${\cup \mathcal{E}_U=U\land x\in U}$,
+    ${\exists V_0\in\mathcal{E}_U\st x\in V_0}$,
+    satisfying \ref{defn:04:nbhd-base:itm:02} in the definition of
+    neighborhood base since
+    ${\mathcal{E}_U\subset\mathcal{E}\land V_0\in\mathcal{E}_U\land x\in V_0\Rightarrow V_0\in\mathcal{N}}$.
+  \end{description}
+\end{proof}
+
+\sketch{\loopy so ``base'' is the same as in general topology,
+  there's just this point-wise view of it}

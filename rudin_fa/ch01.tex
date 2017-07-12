@@ -1,0 +1,555 @@
+\chapter{Topological Vector Spaces}
+
+\section{Introduction}
+Provisional definitions to be made precise in later sections
+
+\section{Normed Spaces}
+\begin{defn}
+  a vector space, $X$, is a \emph{normed space} if \\
+  ${\forall x\in X\exists \|x\|\in R\st}$
+  \begin{enumerate}[label=(\alph*)]
+  \item\label{defn:norm:1}\label{defn:norm:triangle}
+    ${\|x+y\|\leq\|x\|+\|y\|,\,\forall x,y\in X}$
+  \item\label{defn:norm:2}\label{defn:norm:scalar-mult}
+    ${\|\alpha x\|=|\alpha|\|x\|,\,\forall x\in X\,\forall\text{scalars }\alpha}$
+  \item\label{defn:norm:3}
+    ${\forall x\in X,\, x\neq 0\Rightarrow \|x\|>0}$.
+  \end{enumerate}
+  Then, ${\|x\|}$ is called the \emph{norm} of $x$, and
+  ``norm'' is also used to describe the function
+  \[ \|\cdot\|: X\rightarrow R\quad x\mapsto\|x\| . \]
+\end{defn}
+
+\begin{rem}{}
+  A normed space may be regarded as a metric space by
+  defining distance
+  \[ d(x, y) = \|x-y\| \]
+\end{rem}
+\begin{proof}\
+  \begin{description}
+  \item[(${0\leq d(x,y)<\infty,\,\forall x,y\in X}$)]
+    STS ${\|x\|\geq 0,\,\forall x\in X}$.
+    By \ref{defn:norm:3} for ${x\neq 0}$. \\
+    For ${x=0}$,
+    ${\alpha x = 0,\,\forall\text{scalars }\alpha}$,
+    so ${x\neq 0\lightning\ref{defn:norm:scalar-mult}}$
+    by cancellation, provided
+    \[
+    \exists\text{ scalars }\alpha_1,\alpha_2 \st |\alpha_1|\neq|\alpha_2|.
+    \]
+  \item[(${d(x,y)=0\iffa x=y}$)]
+    \[
+    x=y \iffa x - y = 0 \stackrel{\dag}{\iffa}
+    \|x-y\|\stackrel{\text{def}}{=} d(x,y) = 0
+    \]
+    observing case ${x=0}$ of the previous part ($\dag$).
+  \item[(${d(x,y)=d(y,x)}$)]
+    \[ |-1| = |1|\land\ref{defn:norm:scalar-mult} \]
+  \item[($\triangle$ inequality)]
+    \[
+    \|x-z\| = \|(x-y)+(y-z)\|\stackrel{\ref{defn:norm:triangle}}{\leq}
+    \|x-y\|+\|y-z\|
+    \]
+  \end{description}
+\end{proof}
+
+\begin{defn}\
+  \begin{itemize}
+  \item
+    the \emph{open ball} with radius $r$, center $x$
+    in any metric space is
+    \[ B_r(x) = \{y\mid d(x, y)<r\} \]
+  \item
+    the \emph{open unit ball} and \emph{closed unit ball}
+    of a normed space, $X$, are
+    \[
+    B_1(0) = \{x\in X\mid \|x\|<1\}
+    \quad\text{and}\quad
+    \overline{B_1(0)} = \{x\in X\mid \|x\|\leq1\},
+    \]
+    respectively.
+  \end{itemize}
+\end{defn}
+
+\begin{rem}{}
+  a topology may be obtained on a metric space by defining open sets
+  to be (possibly empty) unions of open balls
+\end{rem}
+\begin{proof}\
+  \begin{description}
+  \item[(finite $\cap$)]
+    fix ${U, V\in\tau}$.
+    ${U\cap V}$ the union of open balls is implied by
+    \[
+    \forall x\in U\cap V
+    \exists\text{open ball } B\subset U\cap V
+    \st x\in B
+    \]
+    --- i.e. representation as balls needn't be unique.
+
+    So the usual, formally weaker, statement
+    \[
+    \forall x\in U\cap V\exists r>0
+    \st B_r(x)\subset U\cap V
+    \]
+    suffices, and for this,
+    \[
+    U, V\in\tau \Longrightarrow
+    \exists B_1\subset U, B_2\subset V
+    \st x\in B_1\land x\in B_2
+    \]
+    \sketch{%
+      choose $\mathtt{r}$ based on $\mathtt{x}$
+      and centers of $\mathtt{B_1, B_2}$ using $\mathtt{\triangle}$}
+  \end{description}
+\end{proof}
+
+\begin{rem}{}
+  for normed space, vector addtion and scalar multiplication
+  are continuous in the topology defined by open balls
+  \sketch{clarify statement and prove}
+\end{rem}
+
+\begin{defn}\
+  \begin{itemize}
+  \item
+    a metric space is \emph{complete} if Cauchy sequences converge
+  \item
+    a \emph{Banach space} is a normed space
+    that's complete wrt. the metric defined by the norm
+  \end{itemize}
+\end{defn}
+
+\section{Examples of function spaces that aren't (necessarily) Banach spaces}
+
+\begin{enumerate}[label=(\alph*)]
+\item
+  continuous $\mathbb{C}$-valued functions on open ${\subset R^n}$
+\item
+  holomorphic functions on open ${\subset\mathbb{C}}$
+\item
+  $C^\infty$ $\mathbb{C}$-valued functions on $R^n$ with compact
+  support that (the support) has ${\neq\emptyset}$ interior
+\item
+  some spaces used in distribution theory
+\end{enumerate}
+
+These spaces all have topologies that can't be induced by norms.
+
+\paragraph{}
+{\Large
+  $\Uparrow$\hspace{\stretch{1}}
+  All preceeding \S 's considered motivation
+  \hspace{\stretch{1}}$\Uparrow$
+}
+
+\pagebreak
+
+\section{Vector spaces}
+For this \S, let $\Phi$ denote either $R$ or $\mathbb{C}$.
+
+\begin{defn}\
+  \begin{itemize}
+  \item
+    a \emph{scalar} is an element of the \emph{scalar field} $\Phi$
+  \item
+    a \emph{vector space over} $\Phi$ is a set $X$
+    with elements called \emph{vectors}, together with two operations,
+    \emph{addition} and \emph{scalar multiplication},
+    \[
+    +: X^2\rightarrow X
+    \quad\text{and}\quad
+    \cdot: X^2\rightarrow X
+    \qquad\st
+    \]
+    \begin{enumerate}[label=(\alph*)]
+    \item
+      ${\forall x,y\in X,\ x+y=y+x\land x+(y+z)=(x+y)+z}$,\\
+      ${\exists! 0\in X\st\forall x\in X,\ x+0=x}$, and\\
+      ${\forall x\in X\exists! -x\in X\st x+(-x)=0}$, \\
+      where $0$ above is called the \emph{zero vector}
+      or \emph{origin} of $X$.
+    \item
+      ${\forall\alpha,\beta\in\Phi,\ \forall x,y\in X}$\\
+      ${1x=x}$, ${\alpha(\beta x)=(\alpha\beta)x}$, and \\
+      ${\alpha(x+y)=\alpha x+\alpha y\land (\alpha+\beta)x=\alpha x+\beta y}$.
+    \end{enumerate}
+  \end{itemize}
+\end{defn}
+
+\begin{rem}{A}
+  there are distinct ${0\in\Phi}$ and ${0\in X}$
+\end{rem}
+
+\begin{defn}
+  a \emph{real} (resp. \emph{complex}) \emph{vector space}
+  is one where ${\Phi=R}$ (resp. ${=\mathbb{C}}$)
+
+  and throughout the text, vector space is used to mean one of these
+  two cases
+\end{defn}
+
+\begin{addcomment}
+  a vector space is a module where the ring is a field.
+\end{addcomment}
+
+\begin{defn}\
+  \begin{itemize}
+  \item
+    for vector space $X$ over $\Phi$, ${A\subset X}$, ${B\subset X}$,
+    ${x\in X}$, and ${\lambda\in\Phi}$, put
+    \begin{IEEEeqnarray*}{rCl}
+      x+A=\{x+a\mid a\in A\}, & \quad & x-A=\{x-a\mid a\in A\}, \\
+      A+B=\{a+b\mid a\in A\land b\in B\}, & \quad &
+      \lambda A=\{\lambda a\mid a\in A\},
+    \end{IEEEeqnarray*}
+    and in particular ${-A}$ is the set of inverses of elements of $A$.
+  \item
+    for vector space $X$ over $\Phi$, ${Y\subset X}$ is a
+    \emph{subspace} of $X$ if $\restr{+}{Y^2}$ and
+    $\restr{\cdot}{\Phi\times Y}$ satisfy the definition
+    of a vector space for $Y$.
+    \begin{addcomment}
+      usually proof of the form
+      \[
+      \forall \alpha,\beta\in\Phi,\forall x,y\in Y,\,
+      \alpha x+\beta y\in Y
+      \]
+      suffices.  see \ref{rem:01:vecsubspc-char} below.
+    \end{addcomment}
+  \end{itemize}
+\end{defn}
+
+\begin{rem}{B}\label{rem:01:vecsubspc-char}
+  \[
+  Y\subset X\text{ a subspace }
+  \iff
+  0\in Y\land \forall\alpha,\beta\in\Phi,\, \alpha Y+\beta Y\subset Y
+  \]
+\end{rem}
+\begin{proof}
+  \sketch{todo (not in text)}
+\end{proof}
+
+\begin{defn}
+  for a vector space $X$,
+  \begin{itemize}
+  \item
+    a set ${C\subset X}$ is \emph{convex} if
+    \[ \forall t\in[0,1],\, tC+(1-t)C\subset C \]
+    or equivalently
+    \[ \forall t\in[0,1],\forall x,y\in C,\, tx+(1-t)y\in C . \]
+  \item
+    a set ${B\subset X}$ is \emph{balanced} if
+    \[
+    \forall\alpha\in\Phi,\,
+    \|\alpha\|\leq 1\Rightarrow \alpha B\subset B
+    \]
+  \item
+    ${\{u_1,\ldots,u_n\}\subset X}$ is a \emph{basis} for $X$ if
+    \[
+    \forall x\in X \exists! (\alpha_1,\ldots,\alpha_n)\in\Phi^n
+    \st x = \sum_1^n\alpha_j u_j
+    \]
+  \item
+    $X$ has \emph{dimension} ${n\in\mathbb{N}}$, written ${\dim X=n}$,
+    if it has a basis of $n$ elements,
+    and is then said to have \emph{finite dimension}
+    \sketch{?
+      what facts about basis and $\mathtt{\dim}$ are implicit here?\\
+      what (e.g. existence) can be added?}
+  \end{itemize}
+\end{defn}
+
+\begin{exa}
+  for ${X=\mathbb{C}}$ over ${\Phi=\mathbb{C}}$,
+  the balanced sets are $\mathbb{C}$, $\emptyset$,
+  and the discs centered at $0$,\\
+  while for ${X=R^2}$, ${\Phi=R}$, there are more balanced sets,
+  including line segements with midpoints at ${(0,0)}$
+\end{exa}
+
+\sketch{\loopy
+  what're images of line segments in $\mathbb{C}$ under
+  scalar mult?}
+
+\section{Topological spaces}
+
+\begin{defn}\
+  \begin{itemize}
+  \item
+    a \emph{topological space} is ${(S,\tau)\st}$
+    \sketch{the usual}
+  \item
+    for ${E\subset S}$
+    \[
+    \overline E = \cap\{C\supset E\mid C\text{ closed}\}
+    \quad\text{and}\quad
+    E^\circ = \cup\{U\subset E\mid U\text{ open}\}
+    \]
+    are the \emph{closure} and \emph{interior} of $E$
+  \item
+    a \emph{neighborhood} of a point ${p\in S}$ is
+    ${E\in\tau\st p\in E}$
+  \item
+    $S$ is \emph{Hausdorff} if distinct points have
+    disjoint neighborhoods
+  \item
+    \emph{compact}
+    \sketch{the usual: open cover has finite subcover}
+  \item
+    ${\tau'\subset\tau}$ is a \emph{base} for $\tau$ if
+    \[ \forall E\in\tau\exists\mathcal{E}\in\tau'\st\cup\mathcal{E}=E \]
+  \item
+    ${\gamma\subset\tau}$ is a \emph{local base} at ${p\in S}$ if
+    \begin{itemize}
+    \item ${\forall E\in\gamma,\, p\in E}$\\
+      (i.e. --- $\gamma$ consists of neighborhoods of $p$), and
+    \item ${\forall E\in\tau,\,p\in E\Rightarrow\exists F\in\gamma\st F\subset E}$\\
+      (i.e. --- ``every neighborhood of $p$ contains a member
+      of $\gamma$).
+    \end{itemize}
+  \item
+    \emph{inherited topology} on ${E\subset S}$
+    \sketch{the usual}
+  \item
+    topologies and metrics thought of as \emph{compatible},
+    a bi-directional word, when open balls
+    (from the metric) `generate'
+    (i.e. --- specify the strongest/smallest topology containing)
+    of ``induce'' the topology.
+    \sketch{could be cleaner}
+  \item
+    for Hausdorff $X$, a sequence ${\{x_n\}\subset X}$ \emph{converges}
+    to ${x\in X}$, written ${\lim_{n\rightarrow\infty} x_n = 0}$, if
+    \[ \{x_n\}\cap(X\setminus N)\text{ finite} , \forall N \nbhd x \]
+    \sketch{?
+      why specify $X$ Hausdorff?}
+  \end{itemize}
+\end{defn}
+
+\section{Topological Vector Spaces}
+
+\begin{defn}
+  a \emph{toplogical vector space} ${(X,\tau)}$ is a
+  $\Phi$-vector space, $X$, with a topology, $\tau$,$\st$
+  \begin{enumerate}[label=(\alph*)]
+  \item\label{defn:01:tvs:pts-cl}
+    \[ \setcomp{\{p\}}\in\tau,\,\forall p\in X \]
+    (i.e. --- every point is a closed set)
+  \item
+    \[
+    X^2\rightarrow X \quad (x,y)\mapsto x+y
+    \qquad\text{and}\qquad
+    \Phi\times X\rightarrow X \quad (\alpha, x)\mapsto \alpha x
+    \]
+    are both continuous with product topologies on
+    $X^2$ and ${\Phi\times X}$, resp.
+  \end{enumerate}
+  and $\tau$ is called a \emph{vector topology}
+\end{defn}
+
+\begin{rem}{}\
+  \begin{itemize}
+  \item
+    some developments omit \ref{defn:01:tvs:pts-cl} from
+    definition and repeatedly include in hypothesis
+  \item
+    since this text doesn't include a definition of product topologies,
+    it includes specific (metric space) definitions of continuity:
+    \begin{itemize}
+    \item
+      ${X^2\rightarrow X \quad (x,y)\mapsto x+y}$ continuous if
+      \[
+      \forall x,y\in X\,\forall U\nbhd x + y\,
+      \exists V\nbhd x, W\nbhd y
+      \st V + W \subset U
+      \]
+    \item
+      ${\Phi\times X\rightarrow X}$ continuous if
+      \[
+      \forall x\in X, \alpha\in\Phi, U\nbhd \alpha x\,
+      \exists r>0, V\nbhd x
+      \st
+      |\beta-\alpha|<r\Rightarrow \beta W\subset V
+      \]
+    \end{itemize}
+  \end{itemize}
+\end{rem}
+
+\begin{defn}
+  a subset, $B$, of a topological vector space, $X$,
+  is \emph{bounded} if
+  \[
+  \forall V\nbhd 0\in X\exists s>0
+  \quad\st\quad
+  \forall t\in R,\, t>s\Rightarrow B\subset tV
+  \]
+\end{defn}
+
+\section{Invariance}
+\begin{defn}
+  for topological $\Phi$-vector space, $X$, and any ${\alpha\in X}$,
+  ${\lambda\in\Phi}$, the \emph{translation operator}
+  ${T_\alpha:X\rightarrow X}$ and \emph{multiplication operator}
+  ${M_\lambda: X\rightarrow X}$ are ${T_\alpha(x) = \alpha + x}$
+  and ${M_\lambda(x)=\lambda x}$.
+\end{defn}
+
+\begin{prop}\label{prop:01:trans-mult-are-homeo}
+  $T_\alpha$ and $M_\lambda$ are \emph{homeomorphisms} ${X\rightarrow X}$
+  (i.e. continuous bijections with continuous inverses)
+\end{prop}
+\begin{proof}
+  \sketch{
+    todo:  in text but sketchy}
+\end{proof}
+
+\begin{defn}
+  a topology $\tau$ on a vector space $X$
+  (not necessarily with a topology)
+  is \emph{translation-invariant} (or \emph{invariant} when
+  context is clear) $\iff$
+  \[
+  \forall a\in X\,\forall E\subset X,\,
+  E\in\tau \Leftrightarrow a+E\in\tau
+  \]
+\end{defn}
+
+\begin{rem}{}
+  by \ref{prop:01:trans-mult-are-homeo}, every \emph{vector topology}
+  (i.e. a topology on a vector space that satsfies the definition
+  of a topological vector space) is invariant
+\end{rem}
+
+\begin{defn}
+  for a topological vector space, $X$, a \emph{local base}
+  is a local base (as defined for arbitrary topological spaces)
+  at ${0\in X}$
+\end{defn}
+
+\begin{rem}{}
+  if $\mathcal{B}$ is a local base of a topological vector space,
+  ${(X,\tau)}$, then
+  \begin{IEEEeqnarray*}{lr}
+    \forall E\subset X, E\in\tau\iff & \\
+    \exists S\subset\mathscr{P}(X)\st & \\
+    & E =\cup S\land\big(
+    F\in S\Leftrightarrow \exists G\in\mathcal{B}\,\exists a\in X
+    [F=a+G]\big)
+  \end{IEEEeqnarray*}
+  (i.e. --- open sets are precisely unions of translates of
+  $\mathcal{B}$).
+\end{rem}
+
+\begin{defn}
+  a metric, $d$, on a vector space, $X$, is \emph{invariant} if
+  \[d(x+z,y+z)=d(x,y),\forall x,y,z\in X \]
+\end{defn}
+
+\section{Types of topological vector spaces}
+Throughout this section, $X$ a topological vector space with
+a topology, $\tau$.
+
+\begin{defn}\
+  \begin{itemize}
+  \item $X$ is \emph{locally convex}
+    if there's a local base $\mathcal{B}$ $\st$ $E$ convex
+    ${\forall E\in\mathcal{B}}$
+  \item $X$ is \emph{locally bounded}
+    if ${0\in X}$ has a bounded neighborhood
+  \item $X$ is \emph{locally compact} if
+    ${\exists E \nbhd 0 \st \overline{E}\text{ compact}}$
+  \item $X$ is \emph{metrizable} if $\tau$ compatible with some
+    metric $d$
+  \item $X$ is an \emph{F-space} if $\tau$ compatible with
+    a complete, invariant metric $d$
+  \item a \emph{Frechet space} is
+    a locally convex F-space
+  \end{itemize}
+\end{defn}
+
+\begin{rem}{}
+  F-space/Frechet space distinction is not the same in all
+  texts
+\end{rem}
+
+\begin{defn}
+  \sketch{
+    todo: precise defn. of normed space and Banach space,
+    following motivation in 1.2 \emph{of Rudin's text}
+  }
+\end{defn}
+
+\begin{defn}
+  $X$ has the \emph{Heine-Borel property} if
+  \[
+  \forall E\subset X,
+  E\text{ closed}\land E\text{ bounded}
+  \Rightarrow E\text{ compact}
+  \]
+\end{defn}
+
+\section{Separation properties}
+
+\begin{defn}
+  a subset $U$ of a topological vector space $X$ is
+  \emph{symmetric} if ${U=-U}$.
+\end{defn}
+
+\begin{prop}\label{prop:01:A}\label{prop:01:symmetric-subnbhd}
+  for any topological vector space $X$,
+  \[
+  \forall W\nbhd 0,\, \exists U\nbhd 0\st
+  U=-U\land U+U\subset W
+  \]
+  (i.e. --- every neighborhood of zero contains a symmetric
+  neighborhood of zero)
+\end{prop}
+\begin{proof}
+  addition is continuous
+  ${X^2\rightarrow X}$ and ${(+)(0,0)\mapsto 0}$, so\\
+  ${(0,0)\in\text{open }{(+)}^{-1}(W)\subset X^2}$.
+
+  The product topology on $X^2$ is the
+  \[
+  \cap \big\{\tau\text{ on }X\mid
+  \{U\times X\mid U\subset X\text{ open}\} \cup
+  \{X\times U\mid U\subset X\text{ open}\} \big\}
+  \]
+  (i.e. --- the preimages of coordinate maps `generate'
+  the product topology).
+  \sketch{$\circledast$ cf. Folland}
+  or, in different (wikipedia) language,
+  preimages of coordinate maps are a \emph{subbase}
+  of the product topology, and
+  \begin{description}
+  \item{fact:} the set of all finite intersections of preimages of
+    open sets under coordinate maps is a base for the product
+    topology
+  \end{description}
+  \sketch{$\star$ write wiki proof (?) $\star$
+  }
+
+  Fix [basis elements] open ${V_1, V_2\subset X}$ $\st$
+  ${(0,0)\in V_1\times V_2\subset {(+)}^{-1}(V)}$
+  --- i.e., ${V_1+V_2\subset W}$.
+  Set ${U=V_1\cap V_2\cap(-V_1)\cap(-V_2)}$.
+
+  Then
+  ${0\in V_1,V_2\Rightarrow V_1,V_2\subset W \Rightarrow U\subset W}$,\\
+  and
+  ${x\in U\Rightarrow x\in V_1\cap V_2\Rightarrow -x\in (-V_1)\cap (-V_2)\supset U}$,\\
+  and
+  ${-x\in U\Rightarrow-x\in (-V_1)\cap(-V_2)\Rightarrow x\in V_1\cap V_2\supset U}$.
+\end{proof}
+
+
+\begin{thm}\label{thm:01:1.10}\label{thm:01:cpt-cl-sep}
+  for all topological vector spaces, $X$, and all ${K, C\subset X}$,
+  \begin{IEEEeqnarray*}{c}
+    K\text{ compact}\land C\text{ closed}\land K\cap C = \emptyset
+    \Rightarrow \\
+    \exists V\nbhd 0\st (K+V)\cap(C+V)=\emptyset
+  \end{IEEEeqnarray*}
+\end{thm}
