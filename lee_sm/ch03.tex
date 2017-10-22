@@ -1,0 +1,93 @@
+\chapter{Tangent Vectors}
+
+\section{Tangent Vectors}
+\paragraph{}
+ye olde non-Carta-Euclidean quandry:
+when are angles really (independently) meaningful?
+
+\section{Geometric Tangent Vectors}
+
+\begin{defn}
+  \begin{itemize}
+  \item
+    the \emph{geometric tangent space} to $R^n$ at $a\in R^n$ is
+    $R^n_a:=\{a\}\times R^n$
+  \item
+    a \emph{geomteric tangent vector} in $R^n$ is
+    an element of $R^n_a$,
+    \sketch{for some $a\in R^n$}
+    $(a, v)\in R^n_a$, denoted $v_a$ (or $\restr{v}{a}$).
+  \end{itemize}
+\end{defn}
+
+\begin{rem}{}
+  $R^n_a$ is a vector space (algebraically) isomorphic to $R^n$ under
+  \[
+  +: (v_a, w_a)\mapsto (v+w)_a
+  \quad\text{and}\quad
+  \cdot: (\alpha, v_a)\mapsto(\alpha v)_a
+  \]
+  with basis $\{\restr{e_j}{a}\}_1^n$, where
+  $\{e_j\}_1^n$ is the unit basis in $R^n$.
+\end{rem}
+
+\begin{defn}
+  for $f:R^n\rightarrow R\in C^\infty(R^n)$,
+  the `directional derivative' of $f$
+  in the direction of $v\in R^n$ at $a\in R^n$ is
+  \[
+  D_vf(a):=\restr{\frac{d}{dt}}{t=0} f(a+tv),
+  \]
+  the derivative of
+  \[ R\rightarrow R\quad t\mapsto f(a+tv) \]
+  evaluated at $t=0$.
+\end{defn}
+
+\begin{rem}{}
+  for $v_a\in R^n_a$, define
+  \[
+  \restr{D_v}{a}:C^\infty(R^n)\rightarrow R \quad f\mapsto D_vf(a).
+  \]
+  Now
+  \[
+  \restr{D_v}{a}(fg) = f(a)\restr{D_v}{a}g + g(a)\restr{D_v}{a}f,
+  \]
+  for any $v_a=v^i\restr{e_i}{a}$ (recalling summation convention),
+  \[
+  \restr{D_v}{a} f = v^i\frac{\partial f}{\partial x_i}(a),
+  \]
+  and in particular for $v_a=\restr{e_j}{a}$, a basis vector,
+  \[
+  \restr{D_v}{a} f = \frac{\partial f}{\partial x_i}(a).
+  \]
+\end{rem}
+\begin{proof}
+  \sketch{$\attn$ todo: check from foundations ---
+    follows from product and chain rules
+  }
+\end{proof}
+
+\begin{defn}
+  a \emph{derivation} at $a\in R^n$ is a linear
+  (recall remark~\ref{rem:02:sm-fn-vec-spc} in Chapter~\ref{chap:02})
+  map $X: C^\infty(R^n)\rightarrow R$ such that
+  \[ X(fg)=f(a)Xg+g(a)Xf, \forall f,g\in C^\infty(R^n) \]
+  and $T_a(R^n)$ denotes the set of derivations of
+  $C^\infty(R^n)$ at $a$.
+\end{defn}
+
+\begin{rem}{}
+  $T_a(R^n)$ is a vector space under
+  \[
+  +: (X, Y)\mapsto (f\mapsto Xf + Yf)
+  \quad\text{and}\quad
+  \cdot: (\alpha, X)\mapsto \big(f\mapsto \alpha(Xf)\big)
+  \]
+\end{rem}
+\begin{proof}
+  \sketch{$\attn$ todo.
+    specifically, consider checking that this is a
+    subspace of $L(C^\infty(R^n), R)$ \underline{closed}
+    under vector space operations
+  }
+\end{proof}

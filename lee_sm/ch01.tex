@@ -1,0 +1,736 @@
+\chapter{Smooth Manifolds}
+
+\section{Topological Manifolds}
+\begin{defn}\
+  \begin{itemize}
+  \item
+    a topological space, $M$, is a \emph{topological manifold} if
+    \begin{enumerate}[label=(\roman*)]
+    \item\label{defn:tm:haus} $M$ \emph{Hausdorff} --- i.e.
+      \[
+      \forall p, q\in M \exists U,V \in \topo_M \st
+      U\cap V = \emptyset \land p\in U \land q\in V
+      \]
+    \item\label{defn:tm:secondcount}
+      $M$ \emph{second countable} --- i.e.
+      $\exists\mathcal E\subset \mathscr P(M)$,
+      a countable basis for $\topo_M$
+    \item\label{defn:tm:leuclid}
+      $M$ is \emph{locally Euclidean of dimension} $n$ --- i.e.
+      \begin{IEEEeqnarray*}{rCl}
+        \forall p\in M
+        \exists \varphi: U\subset M\rightarrow \widetilde U\subset R^n
+        & \st & \\
+        U\nbhd p\land
+        \widetilde U\in \topo_M
+        & \land & \varphi \text{ a homeomorphism},
+      \end{IEEEeqnarray*}
+      (recalling that a \emph{homeomorphism} is a continuous
+      bijection with a continuous inverse).
+    \end{enumerate}
+  \item
+    $\dim M = n$ or $M^n$ are used to indicate the dimension of
+    a manifold, depending on context
+  \end{itemize}
+\end{defn}
+
+\begin{rem}{A}
+  for Hausdorff topological space, $X$
+  \begin{enumerate}[label=(\alph*)]
+  \item
+    $\setcomp{\{p\}}\in\topo_X, \forall p\in X$
+    (i.e. single point sets are closed)
+  \item
+    \sketch{``limits of convergent sequences unique'' (???)}
+  \end{enumerate}
+\end{rem}
+\begin{proof}
+  \sketch{exercise A.5}
+\end{proof}
+
+\begin{rem}{B}\label{rem:01:open-is-submani}
+  any open subset a topological $n$-manifold is itself a
+  topological $n$-manifold.
+\end{rem}
+\begin{proof}
+  \sketch{
+    $\attn$ todo --- apply A.5
+  }
+\end{proof}
+
+\begin{rem}{C}
+  $\emptyset$ a topological $n$-manifold $\forall n\in\mathbb N$
+\end{rem}
+\begin{proof}
+  direct from definition
+\end{proof}
+
+\section{Coordinate charts}
+Let $M$ be a topological $n$-manifold throughout this section.
+\begin{defn}\
+  \begin{itemize}
+  \item
+    a \emph{coordinate chart} (or \emph{chart}) is $(U,\varphi)$
+    where $U\subset M$ open and
+    $\varphi: U\rightarrow \widetilde U$
+    is a homeomorphism to open $\widetilde U\subset R^n$.
+    (as from definition of a topological $n$-manifold).
+  \item
+    a chart $(U,\varphi)$ is \emph{centered} at $p\in M$
+    if $\varphi(p)=0$.
+  \item
+    $U$ is the \emph{coordinate domain} or
+    \emph{coordinate neighborhood} of its points for any chart
+    $(U,\varphi)$,
+    and if $\varphi(U)\subset R^n$ is an open ball, then
+    $U$ is a \emph{coordinate ball}.
+  \item
+    a chart's map, $\varphi$, is called a
+    \emph{(local) coordinate map}, and
+    $\{x^i: U\rightarrow R\}_{i=1}^n$
+    defined by
+    $x^i=\pi_i\circ\varphi$
+    such that
+    $\varphi(p)=(x^1\small(p\small),\ldots,x^n\small(p\small))$
+    are called \emph{local coordinates} on $U$,
+    sometimes denoting charts a-la
+    $(U, \small(x^i\small))$.
+  \item
+    the phrase
+    ``$(U,\varphi)$ a chart containing $p$''
+    is sometimes used to abbreviate
+    ``$(U,\varphi)$ a chart such that $p\in U$''
+  \end{itemize}
+\end{defn}
+
+\sketch{
+  skipping several examples for now,
+  projective space and the product manifold in particular
+}
+
+\section{Topological properties of manifolds}
+\begin{defn}
+  for a topological space, $X$, a subset $K\subset X$ is
+  \emph{precompact} (or \emph{relatively compact}) in $X$ if
+  $\overline K$, its closure in $X$, is compact
+\end{defn}
+
+\begin{lem}\label{lem:1.6}\label{lem:01:tm-basis}
+  every topological manifold has a countable basis
+  of precompact coordinate balls.
+\end{lem}
+\begin{proof}\
+  \begin{itemize}
+  \item[(Special case)]
+    Fix
+    \[ M^n\st \exists\text{ chart } (M,\varphi). \]
+    Put
+    \[
+    \mathscr B = \{B_r(x)\subset R^n\mid
+    r\in\mathbb Q\land \pi_i(x)\in\mathbb Q, \forall i\in[n] \land
+    \overline{B_r(x)}\subset\varphi(M) \}.
+    \]
+    Now
+    \[ B \text{ precompact in } \varphi(M), \forall B\in\mathscr B, \]
+    \sketch{\attn todo: check.}
+    and $\mathscr B$ countable as the union of countable sets.
+    Moreover, and also, $\mathscr B$ a basis for
+    $\topo_{\varphi(M)}$.
+    \sketch{\attn todo: check.}
+    Since $\varphi$ continuous,
+    $\{\varphi^{-1}(B)\subset M\mid B\in\mathscr B\}$
+    is the desired basis for $\topo_M$.
+  \item[(General case)]
+    Fix arbitrary $M^n$.
+    By definition of a topological manifold,
+    \[
+    \forall p\in M\exists\text{ chart }(U_p, \varphi_p)\st p\in U_p.
+    \]
+    Hence $\{U_p\}_{p\in M}$ covers $M$,
+    and since $M$ second countable by definition, by
+    \begin{fact}
+      every open cover of a second countable topological space
+      has a countable subcover
+    \end{fact}
+    \begin{proof}
+      \sketch{\attn todo: check.
+      (A.4 in this text, or cross-reference)}
+    \end{proof}
+    \[
+    \exists \{p_j\}_1^\infty \subset M \st
+    \{U_j:=U_{p_j}\}_1^\infty \text{ covers } M.
+    \]
+    Also put $\varphi_j := \varphi_{p_j}$.
+    By remark~\ref{rem:01:open-is-submani},
+    $U_j$ is a topological $n$-manifold $\forall j\in\mathbb N$,
+    so by special case,
+    $\exists \mathcal E_j$,
+    a countable basis of precompact coordinate balls for
+    $\topo_{U_j}$, $\forall j\in\mathbb N$,
+    and $\cup_{j\in\mathbb N} \mathcal E_j$ is countable
+    as a countable union of countable sets.
+    Moreover and also,
+    $\mathcal E:= \cup_j\mathcal E_j$ a basis for $\topo_M$.
+    \sketch{$\attn$ ??? this is not obvious to me}
+
+    \sketch{
+      unless... \\
+      $\mathscr B$ a basis for $(X,\topo)$ iff
+      $\forall U\in\topo\exists S\subset \mathscr B$
+      s.t. $\cup S=U$
+      $\attn$ check/cross-reference \\
+      since the latter is equivalent to
+      \[
+      \forall U\in\topo\forall p\in U\exists V\in\mathscr B\st
+      p\in V\land V\subset U,
+      \]
+      witch, in turn, can be satisfied, writing
+      $\mathcal E:= \cup_j\mathcal E_j$
+      by observing
+      \[
+      \forall U\in\topo_M\forall p\in U \exists j\in\mathbb N\st
+      p \in U_j.
+      \]
+      now $\mathcal E_j$ a basis for $U_j$,
+      $U\cap U_j$ open in $U_j$, and $p\in U\cap U_j$
+      together imply
+      \[
+      \exists V\in\mathcal E_j\subset \mathcal E \st
+      p\in V\land V\subset U\cap U_j.
+      \]
+    }
+    \sketch{\loopy open sets in subspace topology of an open set
+      are open sets in the original topology\loopy}
+    \sketch{\attn still loopy on this one. revisit.}
+    For $V\in\mathcal E$,
+    $\overline{V}^{U_j}$, the closure of $V$ in $U_j$
+    for some (i.e. the corresponding) $j\in\mathbb N$
+    (i.e. $\st V\in\mathcal E_j$),
+    is homeomorphic to a closed, bounded subset of $R^n$,
+    hence compact, so $\overline{V}^{U_j}$ closed in $M$.
+    \sketch{??? because compact subsets of a Haus. spc. are closed?
+      double-check/cross-refrence.}
+    Conclude
+    \begin{enumerate}[label=(\roman*)]
+    \item\label{lem:01:tm-basis:pf:conclude-01}
+      $\overline{V}^{U_j} = \overline{V}^M$
+      \sketch{needs check ... the above gives $\supset$,
+        but the reverse isn't here verbatim}
+    \item
+      $\overline{V}^M$ compact
+      \sketch{follows from
+        \ref{lem:01:tm-basis:pf:conclude-01}
+        since compact in subspace implies compact in space
+      }
+      (i.e. --- elements of $\mathcal E$ precompact in
+      $\topo_M$ as well).
+    \end{enumerate}
+  \end{itemize}
+\end{proof}
+
+\begin{defn}
+  a topological space, $X$, is \emph{locally compact} if
+  \[
+  \forall p\in X\exists U\nbhd p
+  \exists\text{ compact } K\subset M\st U\subset K.
+  \]
+\end{defn}
+
+\begin{rem}{D}\label{rm:01:haus-lcpt}
+  if topological space, $X$, Hausdorff,
+  then $X$ locally compact iff $X$ has a basis of
+  precompact open sets
+\end{rem}
+\begin{proof}
+  \sketch{\attn todo.
+    text contains a reference to another book by lee.
+    perhaps this can be checked directly?
+  }
+\end{proof}
+
+\begin{cor}
+  every topological manifold is locally compact
+\end{cor}
+\begin{proof}
+  \ref{lem:01:tm-basis} and remark~\ref{rm:01:haus-lcpt}
+\end{proof}
+
+\section{Connectivity}
+\begin{defn}
+  a topological space, $X$, is
+  \begin{itemize}
+  \item
+    \emph{connected} if
+    \[
+    \nexists U,V\in\topo_X \st
+    U\neq\emptyset \land V\neq\emptyset\land
+    U\cup V=X\land U\cap V=\emptyset
+    \]
+  \item
+    \emph{path connected} if
+    \[
+    \forall p,q\in X
+    \exists \gamma: [0,1]\rightarrow X \st
+    \gamma(0) = p \land \gamma(1) = q \land
+    \gamma \text{ continuous}
+    \]
+  \item
+    \emph{locally path connected} if
+    $X$ has a basis for path connected (open) sets
+  \end{itemize}
+\end{defn}
+
+\begin{prop}\label{prop:1.8}\label{prop:01:conn-mani}
+  for topological manifold, $M$,
+  \begin{enumerate}[label=(\alph*)]
+  \item\label{prop:01:conn-mani:lpconn}
+    $M$ locally path connected
+  \item\label{prop:01:conn-mani:conn-pconn-equiv}
+    $M$ connected iff $M$ path connected
+  \item\label{prop:01:conn-mani:conn-pconn-comp-equiv}
+    the connected components of $M$ are its path-connected components
+  \item\label{prop:01:conn-mani:comp}
+    \begin{enumerate}[label=(\roman*)]
+    \item\label{prop:01:conn-mani:comp:count}
+      $M$ has at most countably many components
+    \item\label{prop:01:conn-mani:comp:open}
+      each component of $M$ is open in $M$, and
+    \item\label{prop:01:conn-mani:comp:tm}
+      each component is a connected topological manifold
+    \end{enumerate}
+  \end{enumerate}
+\end{prop}
+\begin{proof}\
+  \begin{itemize}
+  \item[\ref{prop:01:conn-mani:lpconn}]
+    follows from \ref{lem:01:tm-basis},
+    since balls in euclidean space are path connected
+  \item[\ref{prop:01:conn-mani:conn-pconn-equiv},
+    \ref{prop:01:conn-mani:conn-pconn-comp-equiv},
+    \ref{prop:01:conn-mani:comp}\ref{prop:01:conn-mani:comp:open}]
+    Recall the following
+    \begin{fact}
+      for a locally path connected topological space, $X$,
+      \begin{enumerate}[label=(\alph*)]
+      \item
+        the connected components of $X$
+        (i.e. the equivalence classes of $\sim$, where
+        $p\sim q$ if $\exists S\subset X$ such that
+        $S$ connected and $p, q\in S$)
+        are open in $X$
+      \item
+        the path connected components of $X$ are the same
+        as the connected components of $X$.
+      \item
+        $X$ connected iff $X$ path connected
+      \end{enumerate}
+    \end{fact}
+    \sketch{$\attn$ the above is available in this text as A.16.
+      include proof or cross-reference.\\
+      also handle loose ends of applying this and
+      \ref{prop:01:conn-mani:lpconn}
+    }
+  \item[\ref{prop:01:conn-mani:comp}\ref{prop:01:conn-mani:comp:count}]
+    \ref{prop:01:conn-mani:comp}\ref{prop:01:conn-mani:comp:open}
+    allows us to view the components of $M$ as and open cover, $C$,
+    and $M$ second countable implies
+    the cover has a countable subcover $S\subset C$.
+    \sketch{$\attn$ double-check/cross-reference that every
+      open cover of a second-countable space has a countable
+      subcover
+    }
+    since $U\cap V=\emptyset, \forall U,V\in C$
+    by definition of connected components as equivalence classes,
+    $\cup S = M = \cup C \Rightarrow S=C$
+    \sketch{$\attn$ todo: spell out contradiction}
+  \end{itemize}
+\end{proof}
+
+\section{Fundamental Groups of Manifolds}
+\begin{prop}
+  the fundamental group, $\pi_1(M)$,
+  of any topological manifold, $M$, is countable
+\end{prop}
+\begin{proof}
+  by \ref{lem:01:tm-basis}, choose
+  $\mathscr B\subset\mathscr P(M)$,
+  a cover of $M$ by coordinate balls.
+  for any $B, B'\in\mathscr B$,
+  $B\cap B'$ open hence a topological manifold
+  by remark~\ref{rem:01:open-is-submani}
+  and has at most countably many components by
+  \ref{prop:01:conn-mani}\ref{prop:01:conn-mani:comp}
+  \ref{prop:01:conn-mani:comp:count},
+  and each component of $B\cap B'$ is path connected by
+  \begin{fact}
+    for a locally path connected topological space, $X$,
+    the path connected components of $X$ are the same
+    as the connected components of $X$.
+  \end{fact}
+  \sketch{$\attn$ the above is available in this text as A.16.
+    include proof or cross-reference.
+  }
+  So get $\mathcal X$ by choice:
+  choose one point from each component
+  of $B\cap B'$ for all $(B, B')\in\mathcal B^2$,
+  and let the union of these points be $\mathcal X$
+  such that $\mathcal X$ is countable,
+  then for each $B\in\mathcal B$ and $x, x'\in B$,
+  let $p_{x,x'}^B$ be a path from $x$ to $x'$
+  (i.e. a continuous map $[0, 1]\rightarrow B$).
+  Choose $q\in\mathcal X$ as a base point for loops in $\pi_1(M)$
+  --- i.e. consider $\pi_1(M, q)$ ---
+  and let a \emph{special loop} be one that's a finite product
+  (considering the fundamental group as multiplicative)
+  of paths of the the form $p_{x,x'}^B$.
+  Since the set of finite subsets of a countable set is countable,
+  \sketch{$\attn$ make sure}
+  the set of special loops is countable.
+  The rest of this proof consists of showing every element of
+  $\pi_1(M, q)$ homotopic to a special loop.
+  \paragraph{}
+  Fix any path $f:[0,1]\rightarrow M$ with $f(0)=f(1)=q$
+  (i.e. any loop at $q$).
+  Now $\{f^{-1}(B) \mid B\in\mathcal B\}$ an open cover
+  of compact $[0, 1]$, so
+  \sketch{$\attn$
+    take care about constructing the following $\attn$\\
+    --- possibly use some facts about preimg.s of conn. sets}
+  \[
+  \exists 0=a_0<a_1<\cdots<a_n=1\st
+  \forall j\in[n]\exists B\in\mathcal B
+  \big[[a_{j-1}, a_j]\subset f^{-1}(B)\big].
+  \]
+  \sketch{$\attn$Finish$\attn$
+    get some paths $\{f_j\}_1^n$ and construct homotopy
+    to special paths using\\
+    1. path-conn. of each $B_{j-1}\cap B_j$, $B_j\cap B_{j+1}$ \\
+    2. homotopy between any two paths in $B_j$ by homeomorphism
+    to Euclidean ball
+  }
+\end{proof}
+
+\section{Smooth Structures}
+\begin{defn}
+  for open $U\subset R^n, V\subset R^m$,
+  $F: U\rightarrow V$ is \emph{smooth}
+  (or $C^\infty$ or \emph{infinitely differentiable})
+  if it has continuous partial derivatives of all orders
+  \sketch{$\attn$ todo ---
+    calculus cross-reference:
+    at a minimum, provide definition of
+    ``partial derivatives of all orders''
+  }
+  and if, additionally, $F$ a bijection with smooth inverse,
+  then $F$ is a \emph{diffeomorphism}
+\end{defn}
+
+\begin{defn}
+  for topological manifold, $M^n$, and
+  charts, $(U,\varphi), (V,\psi) \st U\cap V \neq \emptyset$,
+  $\psi\circ\varphi^{-1}:\varphi(U\cap V)\rightarrow \psi(U\cap V)$
+  is the \emph{transition map} from $\varphi$ to $\psi$.
+  \sketch{$\loopy$ notice directionality of chart
+    ($M\rightarrow U$ \underline{not} $U\rightarrow M$)
+    is different from some other treatments
+    }
+\end{defn}
+
+\begin{rem}{E}
+  the transition map is a homemorphism
+  as the composition of homeomorphisms
+\end{rem}
+
+\begin{defn}\
+  \begin{itemize}
+  \item
+    two charts, $(U,\varphi)$, $(V,\psi)$ are
+    \emph{smoothy compatible} if
+    \[
+    U\cap V=\emptyset \lor
+    \psi\circ\varphi^{-1}\text{ a diffeomorphism}
+    \]
+  \item
+    an \emph{atlas} for topological manifold $M^n$ is a set of charts
+    \[
+    \{(U_\alpha,\varphi_\alpha)\}_{\alpha\in A}
+    \st \cup_{\alpha\in A} U_\alpha = M
+    \]
+  \item
+    an atlas, $\mathscr A$, is a \emph{smooth atlas}
+    if $C_1, C_2$ smoothly compatible $\forall C_1, C_2\in\mathcal A$.
+  \end{itemize}
+\end{defn}
+
+\begin{rem}{F}\label{rem:01:sm-atlas-equiv}
+  formally weaker
+  \[
+  \psi\circ\varphi^{-1}\text{ smooth},
+  \forall (U,\varphi),(V,\psi)\in\mathcal A
+  \]
+  suffices to show $\mathcal A$ smooth
+\end{rem}
+\begin{proof}
+  $(\psi\circ\varphi)^{-1}=\varphi\circ\psi^{-1}$
+\end{proof}
+
+\sketch{$\loopy$
+  just as connected components can be defined as maximal
+  (under inclusion), connected sets of a topological space
+  \underline{or} as equivalence classes as in appendix of this text,
+  smooth atlases also may be defined either by maximality or
+  with an equivalence relation...\\
+  ... here, we'll use maximality
+}
+
+\begin{defn}\
+  \begin{itemize}
+  \item
+    a smooth atlas is \emph{maximal} (or \emph{complete})
+    if it is not properly (set) included in another atlas
+    (i.e. $\nexists$ a smooth atlas $\mathscr A'$
+    such that $\mathscr A\subsetneq \mathscr A'$).
+  \item
+    a \emph{smooth structure} on a topological manifold
+    is a maximal smooth atlas (called a \emph{differentiable structure}
+    or \emph{$C^\infty$ structure} by some)
+  \item
+    a \emph{smooth manifold} is a pair $(M, \mathscr A)$,
+    where $M$ a topological manifold and $\mathscr A$
+    a smooth structure on $M$
+    ($\mathscr A$ omitted when clear from context), and
+    \emph{smooth manifold structure} will be used to describe,
+    connotatively, a manifold topology together with a smooth structure
+    --- the additional information that separates an object in the
+    class of manifolds from that in the class smooth manifolds
+  \end{itemize}
+\end{defn}
+
+\begin{rem}{}
+  there are topological manifolds without smooth structure
+  (although the first such example wasn't found until
+  1960 by Kervaire).
+\end{rem}
+
+\begin{lem}\label{lem:1.10}\label{lem:01:max-atlas}
+  for any topological manifold, $M^n$,
+  \begin{enumerate}[label=(\alph*)]
+  \item\label{lem:01:max-atlas:exists}
+    $\forall$ smooth atlas $\mathscr A$ on $M$,
+    $\exists!$ maximal smooth atlas $\overline{\mathscr A}$
+    on $M$ $\st \mathscr A\subset\overline{\mathscr A}$
+  \item\label{lem:01:max-atlas:pair-uniq}
+    [continuing with notation from \ref{lem:01:max-atlas:exists}]
+    $\forall$ smooth atlas $\mathscr A_1,\mathscr A_2$ on $M$,
+    $\overline{\mathscr A_1} = \overline{\mathscr A_2}$
+    $iff$ $\mathscr A_1 \cap \mathscr A_2$ a smooth atlas
+  \end{enumerate}
+\end{lem}
+\begin{proof}\
+  \begin{itemize}
+  \item[\ref{lem:01:max-atlas:exists}]
+    Put
+    \[
+    \overline{\mathscr A}:=
+    \{\text{chart } (U,\varphi)\text{ on } M\mid
+    (U,\varphi)\text{ sm. compat. }
+    (V,\psi),\forall(V,\psi)\in\mathscr A\}.
+    \]
+    Fix
+    \[
+    (U,\varphi), (V,\psi)\in \overline{\mathscr A}
+    \st U\cap V\neq \emptyset.
+    \]
+    Choose $p\in U\cap V\subset M$, and let
+    $x=\varphi(p)\in\varphi(U\cap V)\subset R^n$.
+    Since $\cup_{\alpha\in A} W_\alpha = M$,
+    where $\mathscr A=\{(W_\alpha,\theta_\alpha)\}_{\alpha\in A}$,
+    choose $(W,\theta)\in\mathscr A\st p\in W$.
+    Now by definition of $\overline{\mathscr A}$,
+    $\theta\circ\varphi^{-1}$ a diffeomorphism --- i.e.
+    $\theta\circ\varphi^{-1}: \varphi(U\cap W)\rightarrow\theta(U\cap W)$
+    is smooth with smooth inverse $\varphi\circ\theta^{-1}$,
+    and similarly,
+    $\theta\circ\psi^{-1}$ a diffeomorphism --- i.e.
+    $\theta\circ\psi^{-1}: \psi(V\cap W)\rightarrow\theta(V\cap W)$
+    is smooth with smooth inverse $\psi\circ\theta^{-1}$.
+    In particular, $\theta\circ\varphi^{-1}$ and $\theta\circ\psi^{-1}$
+    are smooth, and because $p\in U\cap V\cap W\neq\emptyset$,
+    $\psi\circ\varphi^{-1}$ is smooth on
+    $\varphi(U\cap V\cap W)\nbhd x$,
+    \sketch{$\loopy$ careful about neighborhood domains/ranges}
+    where it may be defined as
+    the composition of smooth maps
+    $\psi\circ\varphi^{-1} = (\psi\circ\theta^{-1})\circ(\theta\circ\varphi^{-1})$.
+    Because $p\in U\cap V$ arbitrary, the preceeding shows
+    $\psi\circ\varphi^{-1}$ smooth on all of $U\cap V$
+    \sketch{$\loopy$
+      b/c smoothness a ``local'' property, a property s.t. if true
+      on nbhd. of every pt., true for entire manifold.\\
+      contrast with point-wise properties, and why not say
+      ``smooth at every point''?
+      }
+    so $\overline{\mathscr A}$ a smooth atlas by
+    remark~\ref{rem:01:sm-atlas-equiv}.
+    \paragraph{}
+    $\overline{\mathscr A}$ maximal by definition, for if
+    $\widetilde{\mathscr A}\subset\overline{\mathscr A}$
+    a smooth atlas on $M$, and
+    $\exists C\in \widetilde{\mathscr A}\setminus\overline{\mathscr A}$,
+    then $C$ smoothly compatible $C'$,
+    $\forall C'\in\overline{\mathscr A}\subset\widetilde{\mathscr A}$
+    by definition of smooth atlas $\Rightarrow$
+    $C\in\overline{\mathscr A}$ by definition of
+    $\overline{\mathscr A}$,
+    $\lightning$ choice of $C$.
+    \paragraph{}
+    For uniqueness, choose any maxiaml, smooth atlas
+    $\mathscr B\supset\mathscr A$.
+    Then $C$ smoothly compatible $C'$,
+    $\forall C'\in\mathscr A\subset\mathscr B$
+    by definition of smooth atlas ($\mathscr B$),
+    so $\mathscr B\subset\overline{\mathscr A}$
+    and maximality of $\mathscr B$ implies
+    $\mathscr B=\overline{\mathscr A}$.
+  \item[\ref{lem:01:max-atlas:pair-uniq}]
+    \sketch{$\attn$todo$\attn$}
+    \sketch{($\Leftarrow$):
+      s'th like
+      \[
+      \overline{\mathscr A_1} =
+      \overline{\mathscr A_1 \cup \mathscr A_2} =
+      \overline{\mathscr A_2}
+      \]
+      by observing $\lightning$s. \\
+      ($\Rightarrow$): Put
+      \[
+      \overline{\mathscr A} := \overline{\mathscr A_1} =
+      \overline{\mathscr A_2}
+      \]
+      show $\mathscr A_1\cup\mathscr A_2$ $\lnot$ sm.
+      $\Rightarrow$ $\overline{\mathscr A}$ $\lnot$ sm,
+      for $\mathscr A_1\cup\mathscr A_2 \subset \overline{\mathscr A}$.
+    }
+  \end{itemize}
+\end{proof}
+
+\section{Local Coordinate Representations}
+\begin{defn}\
+  \begin{itemize}
+  \item
+    for smooth manifold $(M, \mathscr A)$, any
+    $(U,\varphi)\in\mathscr A$ is a \emph{smooth chart},
+    $\varphi$ is a \emph{smooth coordinate map}, and
+    $U$ is a \emph{smooth coordinate domain}
+    (or \emph{smooth coordinate neighborhood}).
+  \item
+    a \emph{smooth coordinate ball}, $U$, is
+    the smooth coordinate domain of a smooth chart,
+    $(U, \varphi)$ such that $\varphi(U)\in R^n$ a ball.
+  \end{itemize}
+\end{defn}
+
+\begin{lem}\label{lem:1.11}
+  every smooth manifold has a countable basis
+  of precompact, smooth coordinate balls
+\end{lem}
+\begin{proof}
+  \sketch{$\attn$ todo --- adapt \ref{lem:01:tm-basis}
+    (Ex. 1.5)
+  }
+\end{proof}
+
+\begin{defn}
+  when chart $(U,\varphi)$ on $M^n$ understood from context,
+  for $p\in U$, ``$(x^1,\ldots,x^n)$ is the (local) coordinate
+  representation for $p$'' or ``$p=(x^1,\ldots,x^n)$ in
+  local coordintes'' means
+  $\varphi(p)=(x^1,\ldots,x^n)\in R^n$.
+\end{defn}
+
+In other words, for a chart,
+$(U,\varphi: U\rightarrow\widetilde{U})$,
+$\varphi$ is considered to be the identity map and removed from
+notation while existing in local context.
+\sketch{$\loopy$ attempts to formalize the (common) convention?
+  recall $\varphi$ bij. $U\leftrightarrow\widetilde{U}$
+}
+Take care, however, not to confuse general statements about
+open $U\subset M$ with those that are specific to a particular
+coordinate map $\varphi:U\rightarrow\widetilde{U}\subset R^n$.
+
+\sketch{omitting some examples and § markers}
+
+\begin{nota}
+  (Einstein summation convention) ---
+  if an index appears twice in a monomial term,
+  once as a superscript and once as subscript,
+  then that term denotes a summation
+  (e.g. $x^iE_j$ denotes $\sum_{i\in I} x^i E_i$).
+\end{nota}
+
+\section{Manifolds with Boundary}
+
+\begin{defn}\
+  \begin{itemize}
+  \item
+    \emph{an $n$-dimensional topological manifold with boundary}
+    is a second-countable, Hausdorff topological space
+    such that every point has a neighborhood homemorphic to
+    an open subset of $\mathbb H^n$, where
+    \[\mathbb H^n = \{(x^1,\ldots,x^n)\in R^n\mid x^n\geq 0\}\]
+    with subspace topology induced by $R^n$ is
+    the \emph{upper half-space}
+    (i.e. --- a topological manifold with boundary is just as
+    a topological manifold, except with charts into $\mathbb H^n$
+    instead of $R^n$)
+  \item
+    a chart $(U,\varphi)$ on a topological manifold with boundary
+    is an \emph{interior chart} if
+    $\varphi(U)\subset\Int\mathbb H^n$
+    and a \emph{boundary chart} otherwise
+    (i.e. if $\varphi(U)\cap\mathbb \bdry H^n\neq\emptyset$),
+    where
+    \[
+    \Int\mathbb H^n = \{(x^1,\ldots,x^n)\in R^n\mid x^n > 0\}
+    \text{ and }
+    \bdry\mathbb H^n = \{(x^1,\ldots,x^n)\in R^n\mid x^n = 0\}
+    \]
+  \item
+    for any $A\subset R^n$, $f: A\rightarrow R^m$ smooth if
+    \[
+    \forall p\in A\exists U\nbhd p \underline{\text{ in } R^n},
+    g: U\rightarrow R^m \st
+    g \text{ is }C^\infty\land \restr{g}{A} = \restr{f}{U}
+    \]
+    (i.e. --- smooth maps on Euclidean subsets must be
+    smooth at boundary), so for $U\in\topo_{\mathbb H^n}$,
+    $F: U\rightarrow R^m$ is smooth if
+    \[
+    \forall x\in U \exists\text{open } V\subset R^n
+    \exists\text{smooth }\widetilde{F}: V\rightarrow R^m
+    \st F=\widetilde{F} \text{ on } V\cap U
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{rem}
+  for smooth $F:U\subset\mathbb H^n\rightarrow R^m$,
+  partial derivates of (extensions of) $F$ on
+  $U\cap\bdry\mathbb H^n$ are independent of the choice of extension
+\end{rem}
+\begin{proof}
+  ($\attn$ sketch) $\restr{F}{U\cap\Int\mathbb H^n}$ smooth
+  in the sense of partial derivates of all orders.
+  moreover, differentiability implies continuity,
+  so unique values of partials on $U\cap\bdry\mathbb H^n$
+  are provided by taking limits of partials evaluated at
+  points in $U\cap\Int H^n$.
+\end{proof}
+
+\sketch{skipping some --- In particular,
+  not until Chap. 7 will it be proved that \\
+  $\Int M$ points sent to $\Int\mathbb H^n$ by charts and \\
+  $\bdry M$ points sent to $\bdry\mathbb H^n$ by charts \\
+  are disjoint
+}

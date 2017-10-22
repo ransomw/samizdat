@@ -20,9 +20,13 @@
 \newtheorem{cor}[thm]{Corollary}
 \newtheorem*{axiom}{Axiom}
 \newtheorem*{defn}{Definition}
+\newtheorem*{nota}{Notation}
 \newtheorem*{rem*}{\remarknumber}
 \providecommand{\remarknumber}{}
+\newtheorem*{Ex*}{\exercisenumber}
+\providecommand{\exercisenumber}{}
 \newtheorem*{exa}{Example}
+\newtheorem*{fact}{Fact}
 
 %% ---- RedeclareMathOperator ----
 % https://tex.stackexchange.com/questions/175251/how-to-redefine-a-command-using-declaremathoperator
@@ -48,10 +52,13 @@
 \DeclareMathOperator{\iffa}{\Leftrightarrow}
 \RedeclareMathOperator{\iff}{\ iff\ }
 \DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Int}{Int}
 \DeclareMathOperator{\card}{card}
 \DeclareMathOperator{\diam}{diam}
 \DeclareMathOperator{\nbhd}{nbhd}
+\DeclareMathOperator{\bdry}{\partial}
 \DeclareMathOperator{\acc}{acc}
+\DeclareMathOperator{\topo}{\tau}
 \newcommand{\setcomp}[1]{{#1}^{\mathsf{c}}}
 % https://tex.stackexchange.com/questions/22252/how-to-typeset-function-restrictions
 \newcommand{\restr}[2]{{% we make the whole thing an ordinary symbol
@@ -61,6 +68,7 @@
   \right|_{#2} % this is the delimiter
 }}
 \newcommand{\loopy}{\circledast}
+\newcommand{\attn}{\bigstar}
 
 % as in
 % https://tex.stackexchange.com/questions/167030/numbering-of-assumptions
@@ -72,6 +80,14 @@
     \protected@edef\@currentlabel{#1}%
 }{%
   \end{rem*}
+}
+\newenvironment{Ex}[1]{%
+  %% todo: omit space when #1 undefined, possibly with ifthenelse pkg
+  \renewcommand{\exercisenumber}{Exercise #1}%
+  \begin{Ex*}%
+    \protected@edef\@currentlabel{#1}%
+}{%
+  \end{Ex*}
 }
 
 % https://tex.stackexchange.com/questions/147812/customizing-equation-numbering-labeling-in-ieeeeqnarray

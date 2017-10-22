@@ -1,0 +1,279 @@
+\chapter{Smooth Maps}\label{chap:02}
+
+\begin{defn}
+  for convenience in this text ``function'' will mean a map into $R$
+  (i.e. a real-valued map), while ``map'' (or ``mapping'') remains
+  reserved for the general case,
+  including maps on a topological space such as manifolds.
+\end{defn}
+
+\section{Smooth Functions and Smooth Maps}
+
+\begin{defn}
+  for $n$-dimensional smooth manifold, $(M,\mathscr A)$,
+  $F:M\rightarrow R^\ell$ smooth if
+  \[
+  \forall p\in M\exists (U,\varphi)\in\mathscr A
+  \st p\in U\land f\circ\varphi^{-1}:
+  \widetilde{U}:=\varphi(U)\subset R^n\rightarrow R^\ell
+  \]
+\end{defn}
+
+\sketch{$\attn$ still need differentiability foundations ...\\
+  $\loopy$ would prefer L.R.N. framework\\
+  --- OR prove that calculus and complex analysis definitions
+  are enough b/c finite dimensional t.v.s. must be
+  $R^n$ or $\mathbb C^n$.\\
+  ??? Essentially:  Can we leverage geometry for much more
+  provided more general non-Euclidean foundations
+  are adapted?  $\loopy$ this may be ``branched manifolds''.
+}
+
+\begin{defn}
+  \[
+  C^\infty(M):= \{f:M\rightarrow R\mid f\text{ smooth}\}
+  \]
+  is the space of smooth functions
+  (recalling map/function terminology).
+\end{defn}
+
+\begin{rem}{A}\label{rem:02:sm-fn-vec-spc}
+  $C^\infty(M)$ is a vector space
+  \sketch{$\loopy$ t.v.s., even?}
+\end{rem}
+\begin{proof}\
+  \sketch{todo: boils down to choice of foundations
+    ranted about above:\\
+    Fix $f, g\in C^\infty(M)$ and $\alpha\in R$.
+    WTS $\alpha f$ and $f+g$ smooth, so pick $p\in M$.
+    then $\exists (U,\varphi),(V,\psi)\in\mathscr A$
+    such that $f\circ\varphi^{-1}:\widetilde{U}\rightarrow R$
+    and $g\circ\psi^{-1}:\widetilde{V}\rightarrow R$
+    are $C^\infty$.
+    }
+\end{proof}
+
+\begin{Ex}{2.3}\label{ex:02:sm-real-map}
+  for smooth manifold $(M^n,\mathscr A)$
+  and smooth $f:M\rightarrow R^\ell$,
+  $f\circ\varphi^{-1}:\widetilde{U}=\varphi(U)\rightarrow R^\ell$
+  smooth $\forall (U,\varphi)\in\mathscr A$.
+\end{Ex}
+\begin{proof}\
+  \sketch{todo: ``push logic'' --- i.e. shift around quantifiers
+    and check from definition,
+    recalling in particular that smoothness a local property,
+    not global on $\widetilde{U}$
+  }
+\end{proof}
+
+\begin{defn}
+  for any
+  \sketch{
+    (not necessarily smooth
+    $\attn$ double-check text $\attn$)
+  }
+  $f:M\rightarrow R^\ell$ and $(U,\varphi)\in\mathscr A$,
+  \[
+  \hat f: \varphi(U)\rightarrow R^\ell \quad
+  x\mapsto (f\circ \varphi^{-1})(x)
+  \]
+  is the \emph{coordinate representation} of $f$
+  (with respect to $(U,\varphi)$).
+\end{defn}
+
+\sketch{$\loopy$ very random considerations about
+  ``increasingly small nbhd.s'' about any point ...
+  possible b/c countable basis on a t.v.s.
+  (coordinate neighborhood) implies metrizable.\\
+  perhaps there's some $\sup$/$\inf$ properties on
+  transition maps as these nbhd.s go to a point.
+}
+
+\begin{defn}
+  for smooth manifolds, $(M^n,\mathscr A)$, $(N^\ell,\mathscr B)$
+  a map $F: M\rightarrow N$ is smooth if
+  \begin{IEEEeqnarray*}{rCl}
+    \forall p\in M
+    \exists (U,\varphi)\in\mathscr A, (V,\psi)\in\mathscr B
+    & \st & \\
+    p\in U \land F(U)\subset V & \land &
+    \psi\circ F\circ\varphi^{-1}:
+    \varphi(U)\subset R^n\rightarrow \psi(V)\subset R^\ell
+    \text{ smooth}
+  \end{IEEEeqnarray*}
+\end{defn}
+
+\begin{Ex}{2.4}\label{ex:02:local-sm}
+  smootheness of maps between manifolds is local
+  \sketch{$\attn$ todo:
+    formal statement and proof \\
+    usual application of definition and choice to satisfy
+  }
+\end{Ex}
+
+\begin{lem}\label{lem:2.1}
+  for smooth manifolds $(M,\mathscr A)$, $(N,\mathscr B)$ and
+  $\{U_\alpha\}_{\alpha\in I}\subset\topo_M$
+  such that $\cup_{\alpha\in I} U_\alpha = M$,
+  \[
+  \forall\{F_\alpha:U_\alpha\rightarrow N\}_{\alpha\in I}
+  \st F\text{ smooth}, \forall \alpha\in I \land
+  \restr{F_a}{U_\alpha\cap U_\beta} = \restr{F_\beta}{U_\alpha\cap U_\beta},
+  \forall \alpha, \beta\in I
+  \]
+  \[
+  \exists! F:M\rightarrow N \st F\text{ smooth} \land
+  \restr{F}{U_\alpha}=F_\alpha, \forall \alpha\in I
+  \]
+\end{lem}
+\begin{proof}
+  (Exercise~2.5 $\attn$ sketchish)
+  since at any $p\in M$ all maps $F_\alpha$ agree when defined at $p$,
+  $F$ is well-defined at $p$ as this value,
+  smoothness follows from Exercise~\ref{ex:02:local-sm},
+  and uniqueness follows because $\{U_\alpha\}$ covers.
+  \sketch{$\loopy$ explore why is this not logically equivalent
+    to Exercise~\ref{ex:02:local-sm}
+  }
+\end{proof}
+
+\begin{lem}\label{lem:2.2}\label{lem:02:cts-smooth}
+  every smooth map between smooth manifolds is continuous
+  (wrt. topology under the smooth structure)
+\end{lem}
+\begin{proof}
+  fix smooth manifolds $(M,\mathscr A)$, $(N,\mathscr B)$ and
+  smooth $F: M\rightarrow N$, and choose any $p\in M$.
+  let $(U,\varphi)$, $(V,\psi)$ witness the definition of
+  $F$ smooth.  in particular,
+  $\psi\circ F\circ\varphi^{-1}$ smooth (in $C^\infty$ sense)
+  implies $\psi\circ F\circ\varphi^{-1}$ continuous,
+  \sketch{$\loopy$ depends on the choice of
+    [calculus/analysis] foundations
+  }
+  so $\varphi, \psi^{-1}$ continuous (in topological sense)
+  as homemorphisms by definition of chart implies
+  $\restr{F}{U}$ continuous.
+  conclude by observing the following
+  \begin{fact}
+    for $f: X\rightarrow Y$ on topological spaces,
+    if $\forall x\in X\exists U\in\topo_X, V\in\topo_Y$
+    such that $\restr{f}{U}$ continuous into $V$, then
+    $f$ continuous on all of $X$
+  \end{fact}
+  \begin{proof}
+    \sketch{$\attn$ todo: double-check.\\
+      particularly, decide whether existance of $V$ necessary
+    }
+  \end{proof}
+\end{proof}
+
+\begin{defn}
+  for smooth $F: M\rightarrow N$,
+  \[
+  \widehat F:\widetilde U = \varphi(U)\rightarrow \widetilde V
+  \quad x\mapsto (\psi\circ F\circ\varphi^{-1})(x)
+  \]
+  is the \emph{coordinate representation} wrt.
+  $(U,\varphi)$, $(V,\psi)$ witnessing the definition of $F$ smooth.
+\end{defn}
+
+\begin{Ex}{2.6}\label{ex:02:sm-coord-repr}
+  \sketch{analogue of Exercise~\ref{ex:02:sm-real-map}\\
+    $\attn$ todo: statement and proof ---
+    coordinate representation \underline{for all}
+    choices of pairs of chards
+  }
+\end{Ex}
+
+Consider the following in light of the $F(U)\subset V$
+conjunction in the definition of a smooth map.
+
+\begin{lem}\label{lem:2.3}
+  for smooth manifolds $(M,\mathscr A)$, $(N,\mathscr B)$
+  and continuous \\
+  $F: M\rightarrow N$, write
+  $\mathscr A =\{(U_\alpha, \varphi_\alpha)\}_{\alpha\in I}$,
+  $\mathscr B =\{(V_\beta, \psi_\beta)\}_{\beta\in J}$.
+  \[
+  \psi_\beta\circ F\circ\varphi_\alpha^{-1}
+  \text{ smooth where defined},
+  \forall (\alpha,\beta)\in I\times J
+  \Rightarrow
+  F\text{ smooth}
+  \]
+\end{lem}
+\begin{proof}
+  fix $p\in M$.  since charts cover manifolds, choose
+  \[
+  (\alpha,\beta)\in I\times J \st p\in U_\alpha\land F(p)\in V_\beta,
+  \]
+  put $U:=U_\alpha\cap F^{-1}(V_\beta)$, and observe
+  \[
+  F\text{ continuous} \Rightarrow
+  F^{-1}(V_\beta)\in\topo_M \Rightarrow
+  U\in\topo_M.
+  \]
+  put $\varphi:=\restr{\varphi_\alpha}{U}$.  now
+  \begin{itemize}
+  \item
+    $(U,\varphi)$ a chart since restrictions of homeomorphisms
+    to open sets are again homeomorphisms
+  \item
+    $(U,\varphi)$ smoothly compatible with all elements of
+    $\mathscr A$ since restrictions of diffeomorphisms
+    to open sets are again diffeomorphisms
+  \end{itemize}
+  \sketch{$\attn$ todo: be more sure of the above implications}
+  hence $(U,\varphi)\in\mathscr A$ by maximality of $\mathscr A$.
+  and $F(U)\subset V_\beta$ by choice of $U$, so
+  $(V,\varphi)$, $(V_\beta,\psi_\beta)$ satisfy definition
+  of a smooth map for this (arbitrary) $p\in M$
+  by hypothesis.
+\end{proof}
+
+\begin{lem}\label{lem:2.3}
+  for all smooth manifolds
+  $(M,\mathscr A)$, $(N,\mathscr B)$, $(P,\mathscr D)$
+  and all smooth maps
+  $F:M\rightarrow N$, $G:N\rightarrow P$,
+  the composition
+  $G\circ F: M\rightarrow P$ is smooth
+  (i.e. the composition of smooth maps is smooth).
+\end{lem}
+\begin{proof}
+  Fix $p\in M$.  Choose
+  $(V,\theta)$, $(W,\psi)$ satisfying definition of $G$ smooth
+  with $F(p)$ witnessing $\forall p\in N$ quantifier
+  (i.e.
+  $F(p)\in V\land G(V)\subset W\land \psi\circ G\circ\theta^{-1}$
+  smooth).
+  By lemma~\ref{lem:02:cts-smooth}, $F$ continuous,
+  so $F^{-1}(V)\in\topo_M$. And since $F$ smooth, there's
+  $(U',\varphi')$, $(V',\theta')$ satisfying definition with
+  $p$ witnessing $\forall p\in M$.
+  refine $(U',\varphi')$, $(V',\theta')$ to
+  $U:=U'\cap F^{-1}(V)$, $\varphi:=\restr{\varphi'}{U}$
+  as in the proof of lemma~\ref{lem:2.3}
+  \sketch{$\attn$ double-check and extract refinement technique
+    --- defining a smooth chart according to a smooth map on
+    a manfold .. second chart in definition of smoothness not
+    used here or in lemma~\ref{lem:2.3}
+  }
+  such that
+  \begin{enumerate}[label=(\roman*)]
+  \item $(U,\varphi)$ smooth
+  \item $p\in U\neq\emptyset$
+  \item $U\subset F^{-1}(V)$
+  \end{enumerate}
+  Now by exercise~\ref{ex:02:sm-coord-repr},
+  $\theta\circ F\circ\varphi^{-1}$ smooth, and
+  $\varphi$ chosen such that
+  $\theta\circ F\circ\varphi^{-1}$ defined on all of $U$ (i.e.
+  $\theta\circ F\circ\varphi^{-1}: \varphi(U)\rightarrow\theta(V)$
+  ).
+  \sketch{$\attn$ todo: finish proof}
+\end{proof}
+
+\sketch{skipping some}
