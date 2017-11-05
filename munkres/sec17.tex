@@ -1,0 +1,245 @@
+\section{Closed sets and limit points}
+
+\begin{defn}\
+  \begin{itemize}
+  \item
+    \emph{closed} if compliment is open
+  \item
+    \emph{closed in} for subspaces as with ``open in''
+  \end{itemize}
+\end{defn}
+
+\begin{thm}\label{thm:17.1}\label{thm:17:topo-defn-cl}
+  \sketch{definition of topology by closed sets.\\
+    $\attn$ todo: statement
+  }
+\end{thm}
+\begin{proof}
+  \sketch{$\attn$ todo}
+\end{proof}
+
+\begin{thm}\label{thm:17.2}\label{thm:17:subspc-defn-cl}
+  for $Y$ subspace $X$,
+  \[
+  \setcomp{A}\in\topo_Y\iff \exists U\in\topo_X
+  \st A=\setcomp{U}\cap Y
+  \]
+  \sketch{$\attn$ todo: natural language phrasing}
+\end{thm}
+\begin{proof}
+  \sketch{$\attn$ todo}
+\end{proof}
+
+\subsection{Closure and Interior of a Set}
+
+\begin{defn}
+  for a topological space, $(X,\topo)$,
+  \begin{itemize}
+  \item
+    the \emph{interior} of $A\subset X$ is
+    \[ \Int A = \setint{A} := \cup\{U\in\topo\mid U\subset A\} \]
+  \item
+    the \emph{closure} of $A\subset X$ is
+    \[
+    \overline{A} := \cap\{ C\subset X\mid
+    \setcomp{C}\in\topo\land A\subset C \}
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{thm}\label{thm:17.4}
+  for $Y$ subspace $X$, $A\subset Y$,
+  let $\overline{A}$ by the closure of $A$ in $X$.
+  then $\overline{A}\cap Y$ is the closure of $A$ in $Y$.
+\end{thm}
+\begin{proof}
+  write $B$ for the closure of $A$ in $Y$.
+  by \ref{thm:17:subspc-defn-cl},
+  $\overline{A}$ closed in $X$ implies
+  $\overline{A}\cap Y$ closed in $Y$, so
+  $B\subset \overline{A}\cap Y$.
+  for the reverse, \ref{thm:17:subspc-defn-cl} provides
+  $U\in\topo_X\st B=\setcomp{U}\cap Y$ since $\setcomp{B}\in\topo_Y$.
+  and $\overline{A}\subset \setcomp{U}$ by definition of closure
+  since $A\subset B\subset \setcomp{U}$, so
+  $\overline{A}\cap Y\subset \setcomp{U}\cap Y = B$.
+\end{proof}
+
+\begin{thm}\label{thm:17.5}\label{thm:17:closure-char}
+  for topological space, $(X,\topo)$, and $A\subset X$,
+  \begin{enumerate}[label=(\alph*)]
+  \item\label{thm:17:closure-char:itm:open}
+    \[
+    x\in\overline{A} \iff
+    \forall U\in\topo, x\in U \Rightarrow U\cap A\neq\emptyset
+    \]
+  \item\label{thm:17:closure-char:itm:basis}
+    if $\mathcal B$ is a basis for $\topo$, then
+    \[
+    x\in\overline{A} \iff
+    \forall B\in\mathcal B, x\in B \Rightarrow B\cap A\neq\emptyset
+    \]
+  \end{enumerate}
+\end{thm}
+\begin{proof}\
+  \begin{itemize}
+  \item[\ref{thm:17:closure-char:itm:open}:]
+    \sketch{$\attn$ todo --- check contrapositives}
+  \item[\ref{thm:17:closure-char:itm:basis}:]
+    check equivalence of \ref{thm:17:closure-char:itm:open}
+    and \ref{thm:17:closure-char:itm:basis}'s $\iff$s RHSs:
+    \begin{itemize}
+    \item[\ref{thm:17:closure-char:itm:open} $\iff$ RHS $\Rightarrow$
+      \ref{thm:17:closure-char:itm:basis} $\iff$ RHS]
+      immediate since basis elements are open sets by
+      \ref{lem:13:gen-topo-char}
+    \item[\ref{thm:17:closure-char:itm:open} $\iff$ RHS $\Leftarrow$
+      \ref{thm:17:closure-char:itm:basis} $\iff$ RHS]
+      by \ref{lem:13:gen-topo-char},
+      choose $S\subset \mathcal B$ such that $\cup S = U$.
+      since $x\in U$, choose $B\in S$ such that $x\in B$.
+      now $B\cap A\neq\emptyset$ implies $U\cap A\neq\emptyset$.
+    \end{itemize}
+  \end{itemize}
+\end{proof}
+
+\begin{defn}
+  $U\nbhd x$ means $x\in U\land U\in\topo$
+\end{defn}
+
+$\attn$ contrast with (e.g. Folland's) point-set treatment
+
+\subsection{Limit points}
+
+\begin{defn}
+  for $A\subset X$, $x\in X$, say $x$ a \emph{limit point}
+  (or \emph{cluster point} or \emph{accumulation point})
+  of $A$ if
+  \[ \forall U\nbhd x, U\setminus\{x\}\cap A\neq\emptyset \]
+\end{defn}
+
+\begin{thm}\label{thm:17.6}
+  for topological space, $X$, and $A\subset X$,
+  \[ \overline A = A\cup\acc(A) \]
+  (i.e. the closure of $A$ is $A$ together with all its limit points)
+\end{thm}
+\begin{proof}
+  put $A':=\acc(A)$, the set of all limit points of $A$
+  \begin{itemize}
+  \item[($A\cup A'\subset\overline A$):]
+    $A\subset\overline A$ by definition of closure,
+    so STS $A'\subset A$.
+    Fix $x\in A'$ and suppose
+    \[ \exists\text{closed } C\supset A\st x\not\in C. \]
+    then
+    \[
+    \setcomp{C}\nbhd x\st
+    \setcomp{C}\setminus\{x\} \cap A = \emptyset
+    \lightning x\in A',
+    \]
+    so $x\in\overline{A}$ by definition of closure,
+    and $A'\subset\overline{A}$ since $x$ arbitrary.
+  \item[($\overline{A}\subset A\cup A'$):]
+    choose any $x\in\overline{A}\setminus A$ and any $U\nbhd x$.
+    now
+    \[ U\setminus\{x\}\cap A=\emptyset \iff U\cap A=\emptyset, \]
+    and in thise case $\setcomp{U}\supset A$ closed implies
+    $\overline{A}\supset\setcomp{U}$ by definition of closure
+    $\lightning$ choice of $x, U$ ---
+    i.e. $\overline{A}\setminus A\subset A'$.
+  \end{itemize}
+\end{proof}
+
+\begin{cor}\label{cor:17.7}
+  for topological space, $X$, and $A\subset X$,
+  \[ A \text{ closed }\iff \acc(A)\subset A \]
+\end{cor}
+\begin{proof}
+  \sketch{$\cdots$}
+\end{proof}
+
+\subsection{Hausdorff Spaces}
+
+\[
+X=\{a, b, c\} \quad
+\topo = \big\{X, \emptyset, \{a, b\}, \{b, c\}, \{b\}\big\}
+\]
+a wonderfully minimal counterexample!\\
+consider $\{x_j\}$ where $x_j= b,\forall j$.
+
+\begin{defn}
+  a topological space, $X$, Hausdorff if
+  \[ \forall p,q \in X \exists U\nbhd p, V\nbhd q
+  \st U\cap V=\emptyset \]
+\end{defn}
+
+\begin{thm}\label{thm:17.8}
+  every finite (number of points) subset
+  of a Hausdorff space is closed.
+\end{thm}
+\begin{proof}
+  since finite $\cup$s preserve closure, \underline{STS} ---
+  \[ X\text{ Hausdorff}\Rightarrow
+  \{x\}\text{ closed},\forall x\in X. \]
+  For this choose
+  \[U_p\nbhd x, V_p\nbhd p,\forall p\in X\setminus\{x\}
+  \st p\in V_p\land x\in U_p\land V_p\cap U_p =\emptyset.\]
+  now $X\setminus\{x\}=\cup_{p\in X\setminus\{x\}} V_p$ open
+  implies $\{x\}$ closed.
+\end{proof}
+
+\begin{defn}
+  a topological space satisfies \emph{$T_1$}
+  if finite (point) subsets closed
+  (or equivalently, that $\{x\}$ closed $\forall x\in X$).
+\end{defn}
+
+\begin{thm}\label{thm:17.9}
+  for any $T_1$ topological space, $X$, and $A\subset X$,
+  \[ x\in\acc(A) \iff \forall U\nbhd x, |U\cap A|\text{ infinite} \]
+\end{thm}
+\begin{proof}
+  \begin{itemize}
+  \item[($\Leftarrow$):] direct from definition of a limit point
+  \item[($\Rightarrow$):]
+    suppose otherwise and choose
+    \[ U\nbhd x \st (U\cap A)\setminus\{x\} =
+    \{x_1,\ldots, x_n\}\text{ finite} \]
+    --- so closed by $T_1$.
+    then
+    \[
+    \widetilde{U} :=
+    U\cap\setcomp{\big((A\cap U)\setminus\{x\}\big)} \nbhd x
+    \st \widetilde{U}\setminus\{x\}\cap A=\emptyset
+    \lightning x\in\acc(A)
+    \]
+  \end{itemize}
+\end{proof}
+
+\begin{thm}\label{thm:17.10}
+  for Hausdorff topological space, $X$, and $\forall \{x_j\}\subset X$,
+  there is a most one point $p\in X$ such that
+  \[
+  \forall U\nbhd p \exists N\in\mathbb N
+  \st j>N\Rightarrow x_j\in U.
+  \]
+\end{thm}
+\begin{proof}
+  suppose otherwise and apply definition of Hausdorff
+  \sketch{$\attn$ todo --- sort names, variables}
+\end{proof}
+
+\begin{thm}\label{thm:17.11}
+  \begin{enumerate}[label=(\roman*)]
+  \item
+    \sketch{``order topology'' what? ---
+      skipped section 14}
+  \item
+    the product space of Hausdorff spaces is Hausdorff
+  \item
+    subspaces of Hausdorff spaces are Hausdorff
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+\sketch{$\attn$ todo (exercise)}
+\end{proof}

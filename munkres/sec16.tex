@@ -1,0 +1,73 @@
+\section{Subspace Topology}
+
+\begin{defn}
+  for topological space $(X,\topo)$, $Y\subset X$,
+  \[ \topo_Y := \{Y\cap U\mid U\in\topo\} \]
+  is the \emph{subspace topology} on $Y$,
+  and $Y$ is called a \emph{subspace} of $X$.
+\end{defn}
+\begin{proof}($\topo_Y$ a topology) ---
+  \sketch{check set theory identities, en particular}
+\end{proof}
+
+\begin{lem}\label{lem:16.1}\label{lem:16:subspc-basis}
+  for basis $\mathcal B$ on $X$,
+  \[ \mathcal B_Y := \{B\cap Y\mid B\in\mathcal B\} \]
+  a basis on $Y$
+\end{lem}
+\begin{proof}
+  \begin{itemize}
+  \item[\ref{defn:13:basis:itm:union}]
+    \sketch{$\cap(\cup\cdots)$ ``distributivity''}
+  \item[\ref{defn:13:basis:itm:closure-like}]
+    fix $U\cap Y\in\topo_Y$, $p\in U\cap Y$ for $U\in\topo_X$.
+    by \ref{lem:13:gen-topo-char},
+    $\exists B\in\mathcal B\st p\in B$.
+    now $B\cap Y$ satsifies \ref{lem:13:basis-sufficient}.
+  \end{itemize}
+\end{proof}
+\sketch{$\attn$ double-check statement of the previous result:
+  specifically, is it meant to be shown that
+  $\mathcal B_Y$ is a basis for \underline{some} topology on $Y$, or
+  (as is more likely the case) that $\mathcal B_Y$
+  is a basis for the subspace topology, specifically.
+}
+
+\begin{defn}
+  for $Y$, a subspace of a topological space, $X$,
+  \begin{itemize}
+  \item
+    $U$ \emph{open in} $Y$ (or \emph{open relative to} $Y$)
+    if $U\in\topo_Y$
+  \item
+    $U$ \emph{open in} $X$ (or \emph{open relative to} $X$)
+    if $U\in\topo_X$
+  \end{itemize}
+\end{defn}
+
+\begin{lem}\label{lem:16.2}\label{lem:16:open-rel-open}
+  for $Y$, a subspace of a topological space, $X$,
+  \[
+  U\in\topo_Y\land Y\in\topo_X\Rightarrow U\in\topo_X
+  \]
+\end{lem}
+\begin{proof}
+  choose $V\in\topo_X\st U=V\cap Y$.
+  $\topo_X$ closed under finite $\cap$s.
+\end{proof}
+
+\begin{lem}\label{lem:16.3}
+  for $A$ subspace $X$, $B$ subspace $Y$,
+  the product topology on $A\times B$ is equal to
+  the subspace topology from $X\times Y$.
+\end{lem}
+\begin{proof}
+  \sketch{$\attn$ todo}
+\end{proof}
+
+\sketch{
+  skip section end ...\\
+  relates to order topology, convexity.\\
+  $\attn$ potentially very neat stuff.
+  pair with Rudin F.A. $\attn$
+}

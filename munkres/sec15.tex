@@ -1,0 +1,69 @@
+\section{Product Topology on $X\times Y$}
+
+\begin{defn}
+  the \emph{product topology} on $X\times Y$ is that topology
+  with basis
+  \[ \mathcal B:= \{U\times V\mid U\in\topo_X\land V\in\topo_Y\} \]
+\end{defn}
+\begin{proof}
+  ($\mathcal B$ a basis) ---
+  \begin{itemize}
+  \item[\ref{defn:13:basis:itm:union}]
+    $X\in\topo_X$, $Y\in\topo_Y$
+  \item[\ref{defn:13:basis:itm:closure-like}]
+    check stronger closure under finite $\cap$s
+  \end{itemize}
+\end{proof}
+\sketch{$\loopy$ how to think of intersections of set products
+  in category-theoretic sense?
+}
+
+\begin{thm}\label{thm:15.1}\label{thm:15:fin-prod-basis}
+  for bases $\mathcal B$ on $X$, $\mathcal C$ on $Y$,
+  \[
+  \mathcal D :=
+  \{B\times C\mid B\in\mathcal B\land C\in\mathcal C\}
+  \]
+  is a basis for the product topology on $X\times Y$
+\end{thm}
+\begin{proof}
+  use characterization of product topology
+  \[
+  \big\{\cup S\mid
+  S\subset\{U\times V\mid U\in\topo_X\land V\in\topo_Y\}
+  \big\}
+  \]
+  from \ref{lem:13:gen-topo-char} to satisfy
+  \ref{lem:13:basis-sufficient}
+\end{proof}
+
+\begin{defn}
+  the \emph{projections} on $X\times Y$ are those surjective maps
+  \[
+  \pi_1: X\times Y\rightarrow X\quad (x, y)\mapsto x
+  \qquad\text{and}\qquad
+  \pi_2: X\times Y\rightarrow Y\quad (x, y)\mapsto y
+  \]
+\end{defn}
+
+\begin{thm}\label{thm:15.2}\label{thm:15:fin-prod-subbasis}
+  \[
+  \mathcal S := \{\pi_1^{-1}(U)\mid U\in\topo_X\} \cup
+  \{\pi_2^{-1}(V)\mid V\in\topo_Y\}
+  \]
+  is a subbasis for the product topology on $X\times Y$.
+\end{thm}
+\begin{proof}
+  \sketch{$\attn$ todo: check that $\mathcal S$ indeed a subbasis}
+  \begin{itemize}
+  \item[($\topo_{\mathcal S}\subset\topo_{\mathcal B}$):]
+    \[
+    \mathcal S\subset\topo_{\mathcal B}
+    \land
+    \topo_{\mathcal B}\text{ a topology}
+    \]
+  \item[($\topo_{\mathcal B}\subset\topo_{\mathcal S}$):]
+    $\mathcal B\subset\mathcal N$, so apply \ref{lem:13:gen-topo-char}
+    and definition $\topo_{\mathcal S}$.
+  \end{itemize}
+\end{proof}

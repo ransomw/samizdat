@@ -1,0 +1,73 @@
+\section{Continuous functions}
+
+\begin{defn}
+  for topological spaces $X, Y$, a map $f: X\rightarrow Y$
+  is \emph{continuous} (\emph{relative} to topologies on $X, Y$
+  if emphasis needed) if $\forall U\in\topo_Y, f^{-1}(U)\in\topo_X$
+\end{defn}
+
+\begin{rem}{A}
+  by \ref{lem:13:gen-topo-char},
+  preimages of basis elements open implies continuity
+\end{rem}
+
+\begin{rem}{B}
+  preimages of subbasis elements open implies continuity
+\end{rem}
+
+\sketch{double-check the previous two remarks}
+
+\begin{thm}\label{thm:18.1}\label{thm:18:cts-char}
+  for topological spaces $X, Y$ and map $f: X\rightarrow Y$, TFAE
+  \begin{enumerate}
+  \item\label{thm:18:cts-char:itm:defn}
+    \[ f \text{ continuous} \]
+  \item\label{thm:18:cts-char:itm:closure}
+    \[ \forall A\subset X, f(\overline A)\subset\overline{f(A)} \]
+  \item\label{thm:18:cts-char:itm:closed}
+    \[
+    \forall B\subset Y, \setcomp{B}\in\topo_Y\Rightarrow
+    \setcomp{\big(f^{-1}(B)\big)}\in\topo_X
+    \]
+  \item\label{thm:18:cts-char:itm:ptwise}
+    \[
+    \forall x\in X\forall V\nbhd f(x)
+    \exists U\nbhd x \st f(U)\subset V
+    \]
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  STS
+  \[
+  \ref{thm:18:cts-char:itm:defn} \rightarrow
+  \ref{thm:18:cts-char:itm:closure} \rightarrow
+  \ref{thm:18:cts-char:itm:closed} \rightarrow
+  \ref{thm:18:cts-char:itm:defn}
+  \land
+  \ref{thm:18:cts-char:itm:defn} \leftrightarrow
+  \ref{thm:18:cts-char:itm:ptwise}
+  \]
+  \begin{itemize}
+  \item[(\ref{thm:18:cts-char:itm:defn} $\Rightarrow$
+    \ref{thm:18:cts-char:itm:closure}):]
+    fix any $x\in\overline A$ and suppose $f(x)\not\in\overline{f(A)}$
+    --- i.e. suppose
+    \[
+    \exists U\in\topo_Y \st
+    f(A)\stackrel{\dag}{\subset}\setcomp{U} \land f(x)\in U.
+    \]
+    then $x\in f^{-1}(U)\in\topo_X$ since $f$ continuous and
+    \[
+    \setcomp{\big(f^{-1}(U)\big)}=f^{-1}(\setcomp{U})
+    \stackrel{\dag}{\supset} f^{-1}\big(f(A)\big)\supset A
+    \]
+  \item[(\ref{thm:18:cts-char:itm:closure} $\Rightarrow$
+    \ref{thm:18:cts-char:itm:closed}):]
+  \item[(\ref{thm:18:cts-char:itm:closed} $\Rightarrow$
+    \ref{thm:18:cts-char:itm:defn}):]
+  \item[(\ref{thm:18:cts-char:itm:defn} $\Rightarrow$
+    \ref{thm:18:cts-char:itm:ptwise}):]
+  \item[(\ref{thm:18:cts-char:itm:ptwise} $\Rightarrow$
+    \ref{thm:18:cts-char:itm:defn}):]
+  \end{itemize}
+\end{proof}
