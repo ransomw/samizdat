@@ -177,7 +177,7 @@ For this \S, let $\Phi$ denote either $R$ or $\mathbb{C}$.
   \end{itemize}
 \end{defn}
 
-\begin{rem}{A}
+\begin{rem}{B}
   there are distinct ${0\in\Phi}$ and ${0\in X}$
 \end{rem}
 
@@ -416,7 +416,7 @@ For this \S, let $\Phi$ denote either $R$ or $\mathbb{C}$.
   \]
 \end{defn}
 
-\begin{rem}{}
+\begin{rem}{A}\label{rem:01:tvs-trans-invar}
   by \ref{prop:01:trans-mult-are-homeo}, every \emph{vector topology}
   (i.e. a topology on a vector space that satsfies the definition
   of a topological vector space) is invariant
@@ -509,33 +509,24 @@ a topology, $\tau$.
 \begin{proof}
   addition is continuous
   ${X^2\rightarrow X}$ and ${(+)(0,0)\mapsto 0}$, so\\
-  ${(0,0)\in\text{open }{(+)}^{-1}(W)\subset X^2}$.
-
-  The product topology on $X^2$ is the
-  \[
-  \cap \big\{\tau\text{ on }X\mid
-  \{U\times X\mid U\subset X\text{ open}\} \cup
-  \{X\times U\mid U\subset X\text{ open}\} \big\}
-  \]
-  (i.e. --- the preimages of coordinate maps `generate'
-  the product topology).
-  \sketch{$\circledast$ cf. Folland}
-  or, in different (wikipedia) language,
-  preimages of coordinate maps are a \emph{subbase}
-  of the product topology, and
+  \[{(0,0)\in\text{open }{(+)}^{-1}(W)\subset X^2}.\]
+  \paragraph{}
+  By Munkres~\ref{munkres-thm:15:fin-prod-subbasis},
   \begin{description}
   \item{fact:} the set of all finite intersections of preimages of
     open sets under coordinate maps is a base for the product
     topology
   \end{description}
-  \sketch{$\star$ write wiki proof (?) $\star$
-  }
 
-  Fix [basis elements] open ${V_1, V_2\subset X}$ $\st$
-  ${(0,0)\in V_1\times V_2\subset {(+)}^{-1}(V)}$
-  --- i.e., ${V_1+V_2\subset W}$.
+  So choose such a basis element that contains the point $(0,0)$
+  and is included in ${(+)}^{-1}(W)$:
+  Fix
+  \[V_1, V_2\in \tau_X
+  \st
+  (0,0)\in V_1\times V_2\subset {(+)}^{-1}(V)\]
+  --- i.e. such that ${V_1+V_2\subset W}$.
+
   Set ${U=V_1\cap V_2\cap(-V_1)\cap(-V_2)}$.
-
   Then
   ${0\in V_1,V_2\Rightarrow V_1,V_2\subset W \Rightarrow U\subset W}$,\\
   and
@@ -553,3 +544,316 @@ a topology, $\tau$.
     \exists V\nbhd 0\st (K+V)\cap(C+V)=\emptyset
   \end{IEEEeqnarray*}
 \end{thm}
+\begin{proof}
+  \[K=\emptyset \Rightarrow K+V = \emptyset, \forall V\in\tau_X\]
+  so consider $K\neq\emptyset$.
+  Fix any ${x\in K\Rightarrow x\not\in C}$,
+  and let $T_x: X\rightarrow X$ be the translation $x\mapsto 0$.
+
+  Apply \ref{prop:01:symmetric-subnbhd} to $T_x(\setcomp{C})$,
+  to obtain witness $\tilde U$, and then apply it again
+  to $\tilde U$ to obtain
+  \[ \text{symmetric } V_x\nbhd 0
+  \st V_x + V_x + V_x + V_x \cap T_x C = \emptyset \]
+  and more specifically,
+  \[ 0 + V_x + V_x + V_x \cap T_x C = \emptyset
+  \Leftrightarrow
+  x + V_x + V_x + V_x \cap C = \emptyset . \]
+  Which, together with $V_x$ symmetric implies
+  \sketch{consider logical negation of previous
+    --- i.e. $\exists a,b,c \in V_x, p\in C$
+    such that ${x+a+b+c = p}$ and rename $c=-c$,
+    say, since $V_x=-V_x$.
+  }
+  \begin{equation}\label{eq:01:thm:1.10:1}
+    x + V_x + V_x \cap (C + V_x) = \emptyset.
+  \end{equation}
+
+  Now since $x\in K$ arbitrary and
+  ${\cup_{x\in K} x + V_x\supset K}$ is an open cover of $K$,
+  choose finite subcover $\{x_j + V_{x_j}\}_1^n$, and put
+  ${V:=\cap_1^nV_{x_j}}$.  Then,
+  \[K + V \subset
+  \left(\cup_1^n (x_j + V_{x_j})\right) + V
+  \stackrel{\dag}{\subset}
+  \left(\cup_1^n (x_j + V_{x_j} + V)\right) \subset
+  \left(\cup_1^n (x_j + V_{x_j} + V_{x_j})\right)
+  \]
+  where ($\dag$) follows from considering point-wise representations
+  of elements in each set.  Use \ref{eq:01:thm:1.10:1} to conclude.
+
+\end{proof}
+
+\begin{cor}
+  disjoin neighborhoods contain $K$ and $C$
+\end{cor}
+\begin{proof}
+  \[ A+V = \cup\{T_aV\mid a\in A\} \]
+\end{proof}
+
+\begin{thm}
+  $\forall$ topological vector spaces $X$,
+  $\forall$ local bases $\mathscr B$ of $X$
+  (i.e. --- local bases in the sense of general topology
+  at the origin),
+  $\forall$ $W\in\mathscr B$
+  \[ \exists U\in\mathscr B \st \overline U \subset W .\]
+\end{thm}
+\begin{proof}
+  $\{0\}$, like any finite set, is compact,
+  so put $K=\{0\}$, $C=\setcomp{W}$,
+  and choose $V$ satisfying Theorem~\ref{thm:01:cpt-cl-sep}.
+
+  For any $C, V, K$ as in Theorem~\ref{thm:01:cpt-cl-sep},
+  \[
+  C+V\text{ open }\land (C+V)\cap(K+V)=\emptyset
+  \Rightarrow
+  (C+V)\cap\overline{K+V}=\emptyset,
+  \]
+  since $K+V\subset\setcomp{C+V}$ and the closure is the
+  intersection of all such sets containing $K+V$.
+
+  Now, returning the the context of this theorem,
+  $\exists U\subset\mathscr B\st U\subset V$
+  by definition of local base, and
+  $C\subset C+V\Rightarrow \setcomp{C}\supset\setcomp{(C+V)}$,
+  $U\subset V\Rightarrow \overline{U} \subset \overline{V}$,
+  so conclude
+  \[
+  \overline{U} \subset \overline{V}
+  \subset \overline{K+V} \subset \setcomp{(C+V)}
+  \subset \setcomp{C} = W.
+  \]
+  \sketch{
+    this is a direct application of \ref{thm:01:cpt-cl-sep}.
+    the separation discussed here is
+    the additional separation provided by that theorem between
+    $\{0\}$ and the compliment of any element of a local base.
+  }
+\end{proof}
+
+\begin{rem}{}
+  none of the results thus far have used that each point
+  in a topological vector space is closed.
+\end{rem}
+
+\begin{thm}\label{thm:01:tvs-haus}
+  topological vector spaces are Hausdorff
+\end{thm}
+\begin{proof}
+  just about immediate from Theorem~\ref{thm:01:cpt-cl-sep},
+  its corollary,
+  and the defintion of topological vector spaces:
+
+  For any $p, q\in X$, put $K=\{p\}$, $C=\{q\}$.
+  $K$ cpt as a finite set, $C$ closed by definition
+  of topological vector space.
+  Now the corollary is the definition of Hausdorff.
+\end{proof}
+
+
+\begin{rem}{C}\label{rem:01:closure-open-char}
+  \[
+  p \in \overline{E} \iff
+  \forall U \nbhd p, U\cap E\neq\emptyset
+  \]
+\end{rem}
+\begin{proof}
+  \sketch{
+    contrapositives in both directions by definition of closure.
+  }
+\end{proof}
+
+\begin{lem}\label{lem:01:scalar-mult-intersection}
+  for any topological vector space $X$ over scalar field $\Phi$
+  \[
+  \beta(A\cap B) = (\beta A)\cap(\beta B),\quad
+  \forall A, B\subset X, \forall \beta\in\Phi
+  \]
+\end{lem}
+\begin{proof}
+  For any $q\in X$,
+  \begin{IEEEeqnarray*}{lCr}
+    q\in \beta(A\cap B)
+    & \iff
+    \exists a\in A \exists b\in B &
+    \st q = \beta a = \beta b \\
+    & \stackrel{\dag}{\Leftrightarrow}
+    \exists v \in A\cap B &
+    \st q = \beta v \\
+    && \iff q \in \beta(A\cap B)
+  \end{IEEEeqnarray*}
+  where the forward direction of ($\dag$)
+  follows from the cancellation
+  \[ \beta a = \beta b \Rightarrow a = b, \]
+  and is the only reason this proof of this lemma might not be
+  totally silly to write down in the first place.
+\end{proof}
+
+\begin{lem}\label{lem:01:closure-scalar-mult}
+  for any topological vector space $X$ over scalar field $\Phi$
+  \[
+  \alpha\overline{Y} = \overline{\alpha Y},\quad
+  \forall Y\subset X, \forall \alpha\in\Phi
+  \]
+\end{lem}
+\begin{proof}
+  In case ${\alpha=0}$,
+  both sides of the equality in the hypothesis are $\{0\}$,
+  so choose any ${p\in X}$, ${\alpha\in\Phi}$, and ${\alpha\neq 0}$.
+  \begin{IEEEeqnarray*}{lCr}
+    p\in \overline{\alpha Y}
+    & \stackrel{\dag}{\Leftrightarrow} &
+    U\cap (\alpha Y) \neq\emptyset,\quad
+    \forall U\nbhd p \\
+    & \stackrel{\diamondsuit}{\Leftrightarrow}  &
+    (\alpha^{-1} U)\cap Y \neq\emptyset,\quad
+    \forall U\nbhd p \\
+    & \stackrel{\heartsuit}{\Leftrightarrow}  &
+    V\cap Y \neq\emptyset,\quad
+    \forall V\nbhd \alpha^{-1}p \\
+    & \stackrel{\dag}{\Leftrightarrow} &
+    \alpha^{-1}p \in \overline{Y} \iff p\in\alpha\overline{Y}
+  \end{IEEEeqnarray*}
+  where
+  ($\dag$) follows from Remark~\ref{rem:01:closure-open-char},
+  ($\diamondsuit$) from Lemma~\ref{lem:01:scalar-mult-intersection},
+  and
+  ($\heartsuit$) from Proposition~\ref{prop:01:trans-mult-are-homeo}
+  (i.e. --- ${x\mapsto\alpha x}$ is a homeomorphism).
+  \sketch{$\loopy$
+    ??? prove with intesection definition rather than limit-point
+    characterizaton?}
+\end{proof}
+
+\begin{thm}\label{thm:01:tvs-char-00}
+  for topological vector space $X$ over scalar field $\Phi$
+  \begin{enumerate}[label=(\alph*)]
+  \item\label{thm:01:tvs-char-00:1}
+    \[
+    \forall A\subset X, \overline{A} =
+    \cap\{A+V\mid V\nbhd 0\in X\}
+    \]
+  \item\label{thm:01:tvs-char-00:2}
+    \[
+    \forall A, B\subset X,
+    \overline{A}+\overline{B} \subset \overline{A + B}
+    \]
+  \item\label{thm:01:tvs-char-00:3}
+    \[
+    Y\subspc X \Rightarrow \overline{Y}\subspc X
+    \]
+  \item\label{thm:01:tvs-char-00:4}
+    \[
+    C\subset X \text{ convex}
+    \Rightarrow
+    \overline{C}, \setint{C} \text{ convex}
+    \]
+  \item\label{thm:01:tvs-char-00:5}
+    \[
+    B\subset X\text{ balanced} \Rightarrow
+    \overline{B}\text{ balanced}
+    \]
+    and
+    \[
+    \forall B\subset X,
+    B\text{ balanced}\land 0\in\setint{B}\Rightarrow
+    \setint{B}\text{ balanced}
+    \]
+  \item\label{thm:01:tvs-char-00:6}
+    \[
+    E\subset X\text{ bounded} \Rightarrow
+    \overline{E} \text{ bounded}
+    \]
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  \begin{description}
+  \item[\ref{thm:01:tvs-char-00:1}]
+    \begin{IEEEeqnarray*}{lCr}
+      x\in \overline{A} & \stackrel{\dag}{\Leftrightarrow} &
+      (x+V)\cap A\neq\emptyset, \forall V\nbhd 0 \\
+      & \iff & \forall V\nbhd 0 \exists p\in V\exists a\in A
+      \st x + p =a \\
+      & \iff & \forall V\nbhd 0, x \in A - V.
+    \end{IEEEeqnarray*}
+    where ($\dag$) follows from
+    Remark~\ref{rem:01:closure-open-char} and
+    the invariance of topology under translation in
+    Remark~\ref{rem:01:tvs-trans-invar}.
+    \paragraph{}
+    Conclude by observing
+    \[
+    \{ V\subset X\mid V\nbhd 0\} =
+    \{ -V\subset X\mid V\nbhd 0\}.
+    \]
+  \item[\ref{thm:01:tvs-char-00:2}]
+    Choose any ${A,B\subset X}$,
+    ${a\in\overline{A}, b\in\overline{B}}$,
+    and ${W\nbhd a+b}$.
+    \paragraph{}
+    By Theorem~\ref{munkres-thm:15:fin-prod-basis} in Munkres
+    and continuity of addition, choose
+    \[ W_1 \nbhd a, W_2 \nbhd b \st W_1 + W_2 \subset W. \]
+    Remark~\ref{rem:01:closure-open-char} and choice of ${a,b}$
+    imply
+    \[ A\cap W_1 \neq\emptyset \land B\cap W_2 \neq\emptyset, \]
+    so choose any ${x\in A\cap W_1, y\in B\cap W_2}$ such that
+    \[ x+y\in (A+B) \cap W \neq\emptyset, \]
+    proving since ${a, b, W}$ arbitrary.
+  \item[\ref{thm:01:tvs-char-00:3}]
+    Choose any ${\alpha,\beta\in\Phi}$ and ${Y\subspc X}$.  Now,
+    \[
+    \alpha\overline{Y} + \beta\overline{Y}
+    \stackrel{\dag}{=}
+    \overline{\alpha Y} + \overline{\beta Y}
+    \stackrel{\clubsuit}{\subset}
+    \overline{\alpha Y + \beta Y}
+    \stackrel{\spadesuit}{\subset} \overline{Y}
+    \]
+    where
+    ($\dag$) follows from Lemma~\ref{lem:01:closure-scalar-mult},
+    ($\clubsuit$) from part~\ref{thm:01:tvs-char-00:2} of this theorem,
+    ($\spadesuit$) from
+    Remark~\ref{rem:01:vecsubspc-char}, the sufficient condition
+    for subspaces of a topological vector space,
+    and the observation that
+    ${A\subset B\Rightarrow \overline{A}\subset \overline{B}}$.
+    \sketch{$\loopy$
+      find or extract this last observation to a lemma somewhere,
+      probably in Munkres}
+    So Remark~\ref{rem:01:vecsubspc-char}
+    is satisfied for $\overline{Y}$ as well.
+  \item[\ref{thm:01:tvs-char-00:4}]
+    \begin{description}
+    \item[($\overline{C}$ convex)]
+      Analogous to part~\ref{thm:01:tvs-char-00:3} of this theorem,
+      \[
+      \forall t\in[0, 1],\quad
+      t\overline{C} + (1-t)\overline{C} \subset
+      \overline{tC + (1-t)C}
+      \stackrel{\spadesuit}{\subset} \overline{C}
+      \]
+      except use definition of convex sets rather than
+      definition of closure in $\spadesuit$.
+    \item[($\setint{C}$ convex)]
+      \sketch{$\attn$ todo}
+    \end{description}
+  \item[\ref{thm:01:tvs-char-00:5}]
+    \begin{description}
+    \item[($\overline{B}$ balanced)]
+      Analogous to part~\ref{thm:01:tvs-char-00:3} of this theorem,
+      \[
+      \forall \alpha\in\Phi,\quad
+      \alpha\overline{B}\subset \overline{\alpha B}
+      \stackrel{\spadesuit}{\subset} \overline{B}
+      \]
+      except use definition of balanced sets rather than
+      definition of closure in $\spadesuit$.
+    \item[($\setint{B}$ balanced)]
+      \sketch{$\attn$ todo}
+    \end{description}
+  \item[\ref{thm:01:tvs-char-00:6}]
+    \sketch{$\attn$ todo}
+  \end{description}
+\end{proof}
